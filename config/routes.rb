@@ -4,4 +4,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'pages#home'
+
+  get '/dashboard' => 'user_lists#index', :as => :user_root
+
+  resources :lists
+
+
 end

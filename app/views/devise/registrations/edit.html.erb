@@ -9,7 +9,8 @@
 
     <%= f.input :email, required: true %>
 
-    <%= f.input :avatar, as: :file %>
+    <%= f.input :avatar, as: :file,
+                input_html: { accept: "image/png, image/jpeg" }  %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>

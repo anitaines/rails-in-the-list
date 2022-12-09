@@ -1,0 +1,16 @@
+<h1><%= @list.name %></h1>
+<p><%= @list.comments %></p>
+
+<p>Users:</p>
+
+<ul>
+  <% @list.users.each do |user| %>
+    <li><%= user.first_name %></li>
+  <% end %>
+</ul>
+
+<% if @list.image.attached? %>
+  <%= cl_image_tag @list.image.key, class: "", alt: "" %>
+<% else %>
+  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "", alt: "" %>
+<% end %>

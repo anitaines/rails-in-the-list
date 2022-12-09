@@ -1,0 +1,10 @@
+<%= simple_form_for(@list) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name,
+              autofocus: true,
+              input_html: { autocomplete: "name" }%>
+  <%= f.input :comments %>
+  <%= f.input :image,
+              input_html: { accept: "image/png, image/jpeg" } %>
+  <%= f.submit %>
+<% end %>
