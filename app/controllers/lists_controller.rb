@@ -2,13 +2,15 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   # READ (ALL)
-  def index
-    @lists = List.all
-  end
+  # def index
+  #   @lists = List.all
+  # end
 
   # READ (ONE)
   def show
     # @list = List.find(params[:id])
+    authorize @list
+    @user_list = UserList.where(user: current_user, list: @list).first
   end
 
   # CREATE - STEP 1, GET THE FORM
