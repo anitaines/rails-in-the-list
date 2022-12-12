@@ -1,6 +1,6 @@
 class List < ApplicationRecord
   has_one_attached :image
-  has_many :user_lists # List.find(id).user_lists
+  has_many :user_lists, dependent: :destroy # List.find(id).user_lists
   has_many :users, through: :user_lists # List.find(id).users
 
   validates :name, presence: true

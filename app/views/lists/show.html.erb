@@ -15,4 +15,11 @@
   <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "", alt: "" %>
 <% end %>
 
-<p>Admin: <%= @user_list.admin %></p>
+<p>Admin: <%= @admin %></p>
+
+<% if policy(@list).destroy? %>
+  <%= link_to "Delete List",
+    list_path(@list),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% end %>
