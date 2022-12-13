@@ -10,6 +10,9 @@ class ListsController < ApplicationController
   def show
     # @list = List.find(params[:id])
     authorize @list
+
+    @item = Item.new
+
     @admin = UserList.where(user: current_user, list: @list).first.admin
   end
 

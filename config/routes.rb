@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'user_lists#index', :as => :user_root
 
-  resources :lists, except: [:index]
+  resources :lists, except: [:index] do
+    resources :items, only: [:create]
+  end
 
+  resources :items, only: [:update, :destroy]
 end
