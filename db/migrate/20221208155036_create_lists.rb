@@ -4,7 +4,7 @@ class CreateLists < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.float :latitude
       t.float :longitude
-      t.text :comments
+      t.text :comment
       t.string :status
 
       t.timestamps

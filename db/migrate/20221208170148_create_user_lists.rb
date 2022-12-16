@@ -3,7 +3,7 @@ class CreateUserLists < ActiveRecord::Migration[7.0]
     create_table :user_lists do |t|
       t.references :user, null: false, foreign_key: true
       t.references :list, null: false, foreign_key: true
-      t.boolean :admin
+      t.boolean :admin, default: false
 
       t.timestamps
     end

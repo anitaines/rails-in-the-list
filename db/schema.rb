@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_12_145149) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_171810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_145149) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "list_id", null: false
+    t.bigint "invitation_from_id", null: false
+    t.bigint "invitation_to_id", null: false
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitation_from_id"], name: "index_invitations_on_invitation_from_id"
+    t.index ["invitation_to_id"], name: "index_invitations_on_invitation_to_id"
+    t.index ["list_id"], name: "index_invitations_on_list_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.string "amount"
@@ -60,7 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_145149) do
     t.string "name", null: false
     t.float "latitude"
     t.float "longitude"
-    t.text "comments"
+    t.text "comment"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,7 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_145149) do
   create_table "user_lists", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "list_id", null: false
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_user_lists_on_list_id"
@@ -91,6 +103,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_145149) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "invitations", "lists"
+  add_foreign_key "invitations", "users", column: "invitation_from_id"
+  add_foreign_key "invitations", "users", column: "invitation_to_id"
   add_foreign_key "items", "lists"
   add_foreign_key "items", "users"
   add_foreign_key "user_lists", "lists"

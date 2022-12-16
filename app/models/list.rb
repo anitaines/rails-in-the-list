@@ -3,10 +3,11 @@ class List < ApplicationRecord
   has_many :user_lists, dependent: :destroy # List.find(id).user_lists
   has_many :users, through: :user_lists # List.find(id).users
   has_many :items, dependent: :destroy
+  has_many :invitations, dependent: :destroy
 
   validates :name, presence: true
   validates :name, length: { maximum: 55 }
-  validates :comments, length: { maximum: 255 }
+  validates :comment, length: { maximum: 255 }
   validate :image_size_validation
 
   def image_size_validation

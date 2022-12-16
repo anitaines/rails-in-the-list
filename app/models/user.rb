@@ -5,8 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
-  has_many :user_lists # User.find(id).user_lists
+  has_many :user_lists, dependent: :destroy # User.find(id).user_lists
   has_many :lists, through: :user_lists # User.find(id).lists
+
+  has_many :invitations_from, class_name: 'Invitation', foreign_key: :invitation_from_id, dependent: :destroy
+  has_many :invitations_to, class_name: 'Invitation', foreign_key: :invitation_to_id, dependent: :destroy
 
   validates :first_name, presence: true
   validate :image_size_validation
