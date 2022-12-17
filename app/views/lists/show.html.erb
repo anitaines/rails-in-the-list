@@ -1,5 +1,5 @@
 <h1><%= @list.name %></h1>
-<p><%= @list.comments %></p>
+<p><%= @list.comment %></p>
 
 <p>Users:</p>
 
@@ -9,13 +9,27 @@
   <% end %>
 </ul>
 
+<p>Add user:</p>
+<%= simple_form_for [@list, @invitation] do |f| %>
+
+  <%= f.error_notification %>
+  <%# <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %> %>
+
+  <%= f.input :invitation_to_id, as: :email, input_html: { value: "#{params[:invitation][:invitation_to_id] if params[:invitation]}" } %>
+  <%= f.input :message %>
+
+  <%= f.button :submit, class: "btn btn-warning" %>
+
+<% end %>
+
+
 <% if @list.image.attached? %>
   <%= cl_image_tag @list.image.key, class: "", alt: "" %>
 <% else %>
   <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "", alt: "" %>
 <% end %>
 
-<p>Admin: <%= @admin %></p>
+<p>Current user is Admin?: <%= @admin %></p>
 
 <% if policy(@list).destroy? %>
   <%= link_to "Delete List",

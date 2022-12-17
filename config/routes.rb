@@ -9,7 +9,17 @@ Rails.application.routes.draw do
 
   resources :lists, except: [:index] do
     resources :items, only: [:create]
+    resources :invitations, only: [:create]
+    resources :user_lists, only: [:create] # is this route being used?
   end
 
   resources :items, only: [:update, :destroy]
+
+  resources :invitations, only: [:destroy] do
+    member do
+      post "accept", to: "invitations#accept"
+    end
+  end
+
+  resources :user_lists, only: [:destroy]
 end

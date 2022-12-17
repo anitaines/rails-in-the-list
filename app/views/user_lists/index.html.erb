@@ -1,5 +1,21 @@
 <h1>Dashboard</h1>
 
+<p>Invitations:</p>
+<% current_user.invitations_to.each do |invitation| %>
+<p>Invitation from <%= invitation.invitation_from.first_name %></p>
+<p>List: <%= invitation.list.name %></p>
+<p>Message: <%= invitation.message %></p>
+
+<%= button_to "Accept", accept_invitation_path(invitation), method: :post %>
+
+<%# <%= link_to "Reject", %>
+  <%# invitation_path(invitation), %>
+  <%# data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<%# %> %>
+
+<%= button_to "Reject", invitation, method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } %>
+<% end %>
+
 <ul>
   <% @user_lists.each do |user_list| %>
     <li><%= user_list.list.name %></li>

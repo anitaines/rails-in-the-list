@@ -13,6 +13,8 @@ class ListsController < ApplicationController
 
     @item = Item.new
 
+    @invitation = Invitation.new
+
     @admin = UserList.where(user: current_user, list: @list).first.admin
   end
 
@@ -60,7 +62,7 @@ class ListsController < ApplicationController
     authorize @list
 
     @list.destroy
-    
+
     redirect_to user_root_path, status: :see_other
     # status: :see_other responds with a 303 HTTP status code
   end
