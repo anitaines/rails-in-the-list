@@ -1,0 +1,73 @@
+.list-card {
+  width: 49%;
+  overflow: hidden;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin: 5px;
+}
+
+.list-card a {
+  text-decoration: none;
+}
+
+.card-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-image p {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  margin: 0;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.list-card .status {
+  text-align: center;
+}
+
+.list-card .status p {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  margin: 0;
+}
+
+
+.list-card .card-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-items: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.list-card .users {
+  width: 60%;
+}
+
+.list-card .add-item {
+  width: 25%;
+  text-align: right;
+}
+
+.list-card .users .btn, .list-card .add-item .btn {
+  display: inline-flex;
+  align-items: center;
+  i {
+    margin-right: 5px;
+    font-size: 28px;
+  }
+}

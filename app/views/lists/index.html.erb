@@ -1,5 +1,17 @@
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= list.name %></li>
+
+<div class="dashboard" data-controller="adjust-content">
+
+  <% current_user.invitations_to.each do |invitation| %>
+    <%= render partial: "invitation", locals: {invitation: invitation} %>
   <% end %>
-</ul>
+
+  <%= link_to new_list_path, class: "new-list" do %>
+    <i class="fa-regular fa-file-lines"></i>
+    Create New List
+  <% end %>
+
+  <% @lists.each do |list| %>
+    <%= render partial: "card", locals: { list: list, invitation: @invitation, item: @item } %>
+  <% end %>
+
+</div>

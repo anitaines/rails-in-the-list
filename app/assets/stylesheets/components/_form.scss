@@ -1,0 +1,29 @@
+.list-card .new-invitation, .list-card .new-item, .list-container .new-invitation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0,0,0,0.8);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .fields-container {
+    width: 35%;
+    padding: 36px;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  .fields-container p {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -11,6 +11,6 @@ class InvitationPolicy < ApplicationPolicy
   end
 
   def destroy?
-    Invitation.where(invitation_to: user, list: record.list).first
+    Invitation.where(invitation_to: user, list: record.list).first || UserList.where(user: user, list: record.list).first
   end
 end

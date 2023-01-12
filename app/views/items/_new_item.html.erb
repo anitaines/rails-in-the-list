@@ -1,0 +1,44 @@
+<li data-new-item-list-target="li">
+
+  <%= simple_form_for [list, item],
+    html: {
+      class: "new-item-form",
+      data: {
+        new_item_list_target: "form",
+        action: 'submit->new-item-list#add'
+      }
+    } do |f| %>
+
+    <input type="hidden" name="origin" value="list">
+
+    <div class="new"> 
+      New
+    </div>
+    
+    <div class="name">
+      <%= f.input_field  :name, class: item.errors[:name].any? ? "form-control is-invalid" : "form-control" %>
+    </div>
+    
+    <div class="amount">
+      <%= f.input_field  :amount, class: item.errors[:amount].any? ? "form-control is-invalid" : "form-control" %>
+    </div>
+    
+    <div class="comment">
+      <%= f.input_field  :comment, rows: '1', class: item.errors[:comment].any? ? "form-control is-invalid" : "form-control" %>
+    </div>
+    
+    <div class="actions">    
+      <%= f.button :button do %>
+        <i class="fa-solid fa-circle-plus"></i>
+      <% end %>
+    </div>
+
+  <% end %>
+
+  <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
+    <% item.errors.messages.each do |key, value| %>
+      <p><%= "- Error in #{key}: #{value.first}." %></p>   
+    <% end %>
+  </div>
+
+</li>

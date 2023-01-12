@@ -7,11 +7,34 @@ class ItemsController < ApplicationController
 
     authorize @item
 
-    if @item.save
-      redirect_to list_path(@list) # ?
-    else
-      render 'lists/show', status: :unprocessable_entity
+    if params[:origin] == "dashboard"
+
+      if @item.save
+        @item = Item.new
+      end
+
+      # @user_list = UserList.where(user: current_user, list: @list).first
+      @invitation = Invitation.new
+
+      respond_to do |format|
+        format.html { redirect_to user_root_path }
+        format.text { render partial: "lists/card", locals: { list: @list, invitation: @invitation, item: @item }, formats: [:html] }
+      end
+
+    elsif params[:origin] == "list"
+
+      respond_to do |format|
+        format.html { redirect_to list_path(@list) }
+
+        if @item.save
+          format.text { render partial: "items/new_item_result", locals: { list: @list, item: @item, new_item: Item.new }, formats: [:html] }
+        else
+          format.text { render partial: "items/new_item", locals: { list: @list, item: @item }, formats: [:html] }
+        end
+      end
+
     end
+
   end
 
   def update
@@ -37,11 +60,11 @@ class ItemsController < ApplicationController
 
     @list = @item.list
 
-    if @item.update(item_params)
-      redirect_to list_path(@list) # ?
-    else
-      # @item = Item.new # without this line, render fails
-      render 'lists/show', status: :unprocessable_entity
+    @item.update(item_params)
+
+    respond_to do |format|
+      format.html { redirect_to list_path(@list) }
+      format.text { render partial: "items/item", locals: { item: @item }, formats: [:html] }
     end
   end
 
@@ -54,7 +77,10 @@ class ItemsController < ApplicationController
 
     @item.destroy
 
-    redirect_to list_path(@list), status: :see_other
+    respond_to do |format|
+      format.html { redirect_to list_path(@list), status: :see_other }
+      format.json { render json: { item: 'deleted' } } # json version
+    end
   end
 
   private

@@ -2,9 +2,12 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   # READ (ALL)
-  # def index
-  #   @lists = List.all
-  # end
+  def index
+    # @lists = List.all
+    @lists = policy_scope(List)
+    @invitation = Invitation.new
+    @item = Item.new
+  end
 
   # READ (ONE)
   def show
@@ -14,8 +17,6 @@ class ListsController < ApplicationController
     @item = Item.new
 
     @invitation = Invitation.new
-
-    @admin = UserList.where(user: current_user, list: @list).first.admin
   end
 
   # CREATE - STEP 1, GET THE FORM
@@ -70,7 +71,7 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name, :comments, :image) # :latitude, :longitude,
+    params.require(:list).permit(:name, :comment, :image) # :latitude, :longitude,
   end
 
   def set_list

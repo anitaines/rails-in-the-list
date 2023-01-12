@@ -1,8 +1,8 @@
 class List < ApplicationRecord
   has_one_attached :image
   has_many :user_lists, dependent: :destroy # List.find(id).user_lists
-  has_many :users, through: :user_lists # List.find(id).users
-  has_many :items, dependent: :destroy
+  has_many :users, -> { order(first_name: :asc) }, through: :user_lists # List.find(id).users
+  has_many :items, -> { order(created_at: :asc) }, dependent: :destroy
   has_many :invitations, dependent: :destroy
 
   validates :name, presence: true

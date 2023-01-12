@@ -15,10 +15,27 @@ class InvitationsController < ApplicationController
     authorize @invitation
 
     if @invitation.save
-      redirect_to list_path(@list) # ?
-    else
+      @invitation = Invitation.new
+      params[:invitation] = nil # avoid re-displaying current invitation_to in new rendered invitation
+    end
+
+    if params[:origin] == "dashboard"
+
+      # @user_list = UserList.where(user: current_user, list: @list).first
       @item = Item.new
-      render 'lists/show', status: :unprocessable_entity
+
+      respond_to do |format|
+        format.html { redirect_to user_root_path }
+        format.text { render partial: "lists/card", locals: { list: @list, invitation: @invitation, item: @item }, formats: [:html] }
+      end
+
+    elsif params[:origin] == "list"
+
+      respond_to do |format|
+        format.html { redirect_to list_path(@list) }
+        format.text { render partial: "lists/users", locals: { list: @list, invitation: @invitation }, formats: [:html] }
+      end
+
     end
   end
 
@@ -39,12 +56,20 @@ class InvitationsController < ApplicationController
 
   def destroy
     @invitation = Invitation.find(params[:id])
+    @list = @invitation.list
+
     authorize @invitation
 
     @invitation.destroy
 
-    redirect_to user_root_path, status: :see_other
-    # status: :see_other responds with a 303 HTTP status code
+    if params[:origin] == "dashboard"
+      redirect_to user_root_path, status: :see_other
+    elsif params[:origin] == "list"
+      respond_to do |format|
+        format.html { redirect_to list_path(@list), status: :see_other }
+        format.json { render json: { invitation: 'deleted' } } # json version
+      end
+    end
   end
 
   private

@@ -1,0 +1,127 @@
+<% colors = ["#3b7d87", "#fd712c", "#66ac8f"] %>
+<%#           turquoise, orange,    green %>
+
+<div class="list-card"  data-controller="new-invitation new-item-dashboard" data-new-invitation-target="card" data-new-item-dashboard-target="card">
+
+  <%= link_to(list_path(list)) do %>
+    <% if list.image.attached? %>
+      <div class="card-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.image.key %>')">
+    <% else %>
+      <div class="card-image" style="background-color: <%= colors[rand(0..2)] %>">
+    <% end %>
+    
+        <p><%= list.name %></p>
+
+        <div class="status">
+          <% items_purchased_count =  list.items.where(purchased: true).count%>
+          <% items_count = list.items.count %>
+          <% if items_count.zero? %>
+            <p>- List is empty -</p>
+          <% elsif items_purchased_count == items_count %>
+            <p>- Completed -</p>
+          <% else %>
+            <p>- <%= items_purchased_count %>/<%= items_count %> Done -</p>
+          <% end %>
+        </div>
+
+      </div>
+  <% end %>
+  
+  
+  <div class="card-infos">
+
+    <div class="users">
+      <% list.users.each do |user| %>
+
+        <% if user.avatar.attached? %>
+          <%= cl_image_tag user.avatar.key, class: "avatar" %>
+        <% else %>
+          <div class="no-avatar bg-yellow">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        <% end %>
+        
+      <% end %>
+
+      <% list.invitations.each do |invitation| %>
+
+        <% if invitation.invitation_to.avatar.attached? %>
+          <%= cl_image_tag invitation.invitation_to.avatar.key, class: "avatar pending-user" %>
+        <% else %>
+          <div class="no-avatar bg-yellow pending-user">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        <% end %>
+        
+      <% end %>
+
+      <div class="btn" data-action="click->new-invitation#displayForm">
+        <i class="fa-solid fa-share-nodes"></i>
+        Share List
+      </div>
+    </div>
+
+    <div class="add-item">
+      <div class="btn" data-action="click->new-item-dashboard#displayForm">
+        <i class="fa-solid fa-circle-plus"></i>
+        Add Item
+      </div>
+    </div>
+    
+  </div>
+
+
+  <%# Share List form %>
+  <%= simple_form_for [list, invitation],
+        html: {
+          class: invitation.errors.any? ? "new-invitation" : "new-invitation d-none",
+          data: {
+            new_invitation_target: "form",
+            action: "submit->new-invitation#sendFromDashboard"
+          }
+        } do |f| %>
+      
+      <input type="hidden" name="origin" value="dashboard">
+
+      <div class="fields-container">
+        <p><%= list.name %></p>
+
+        <%= f.input :invitation_to_id, label: "Share List with (email)", as: :email, input_html: { value: "#{params[:invitation][:invitation_to_id] if params[:invitation]}" } %>
+        <%= f.input :message %>
+
+        <div class="buttons">
+          <%= f.button :submit, "Send invitation", class: 'btn btn-confirm' %>
+          <div class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</div>
+        </div>
+      </div>
+    <% end %>
+
+
+    <%# Add Item form %>
+    <%= simple_form_for [list, item],
+        html: {
+          class: item.errors.any? ? "new-item" : "new-item d-none",
+          data: {
+            new_item_dashboard_target: "form",
+            action: "submit->new-item-dashboard#add"
+          }
+        } do |f| %>
+      
+      <input type="hidden" name="origin" value="dashboard">
+
+      <div class="fields-container">
+        <p><%= list.name %></p>
+
+        <%= f.input :name %>
+        <%= f.input :amount %>
+        <%= f.input :comment %>
+
+        <div class="buttons">
+          <%= f.button :submit, "Add Item", class: 'btn btn-confirm' %>
+          <div class='btn btn-cancel' data-action="click->new-item-dashboard#hideForm">Cancel</div>
+        </div>
+      </div>
+
+    <% end %>
+
+</div>

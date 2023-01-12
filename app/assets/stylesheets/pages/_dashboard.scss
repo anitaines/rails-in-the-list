@@ -1,0 +1,28 @@
+.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:flex-start;
+  margin: 36px auto;
+  width: 95%;
+
+  .new-list {
+    width: 49%;
+    min-height: 230px;
+    border-radius: 5px;
+    background-color: $yellow;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 16px;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .new-list i {
+    margin-right: 5px;
+    font-size: 28px;
+  }  
+}

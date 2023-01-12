@@ -4,7 +4,7 @@ class Invitation < ApplicationRecord
   belongs_to :invitation_to, class_name: 'User', foreign_key: :invitation_to_id, required: true
 
   # validates :invitation_to_id, presence: true
-  validates_presence_of :invitation_to_id, message: ' - error: the email is not valid'
+  validates_presence_of :invitation_to_id, message: ' - error: no user exists with this email'
   validates :message, length: { maximum: 255 }
   # validates :invitation_to_id, uniqueness: { scope: :list_id }
   validate :invitation_to_must_be_to_valid_user

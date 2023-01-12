@@ -1,0 +1,94 @@
+<% list.user_lists.each do |user_list| %>
+
+  <div class="user-card" data-controller="remove-user">
+    <% if user_list.user.avatar.attached? %>
+      <%= cl_image_tag user_list.user.avatar.key, class: "avatar" %>
+    <% else %>
+      <div class="no-avatar bg-yellow">
+        <i class="fa-solid fa-user"></i>
+      </div>
+    <% end %>
+    <div class="info">
+      <p><%= user_list.user.first_name %></p>
+      <% if user_list.admin %>
+        <p class="detail">(Created by)</p>
+      <% end %>
+    </div>
+
+    <% unless user_list.admin %>
+      <%= button_to user_list_path(user_list),
+        class: "btn btn-sm btn-outline-secondary",
+        form: { 
+          "data-question" => current_user == user_list.user ? "Do you want to exit this list?" : "Remove #{ user_list.user.first_name } from this list?",
+          "data-action" => "submit->remove-user#deleteUserList" },
+        method: :delete do %>
+          <% if current_user == user_list.user %>
+            Exit List
+          <% else %>
+            Remove
+          <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+  
+<% end %>
+
+
+<% list.invitations.each do |invitation| %>
+
+  <div class="user-card" data-controller="remove-user">
+    <% if invitation.invitation_to.avatar.attached? %>
+      <%= cl_image_tag invitation.invitation_to.avatar.key, class: "avatar pending-user" %>
+    <% else %>
+      <div class="no-avatar bg-yellow pending-user">
+        <i class="fa-solid fa-user"></i>
+      </div>
+    <% end %>
+    <div class="info">
+      <p><%= invitation.invitation_to.first_name %></p>
+      <p class="detail">(Pending)</p>
+    </div>
+
+    <%= button_to invitation_path(invitation),
+        class: "btn btn-sm btn-outline-secondary",
+        form: { 
+          "data-question" => "Cancel #{ invitation.invitation_to.first_name }'s invitation to this list?",
+          "data-action" => "submit->remove-user#deleteInvitation" },
+        params: { origin: 'list' },
+        method: :delete do %>
+          Cancel invitation
+      <% end %>
+  </div>
+  
+<% end %>
+
+<div class="btn btn-info" data-action="click->new-invitation#displayForm">
+  <i class="fa-solid fa-share-nodes"></i>
+  Share List
+</div>
+
+<%# Share List form %>
+<%= simple_form_for [list, invitation],
+  html: {
+    class: invitation.errors.any? ? "new-invitation" : "new-invitation d-none",
+    data: {
+      new_invitation_target: "form",
+      action: "submit->new-invitation#sendFromList"
+    }
+  } do |f| %>
+
+    <input type="hidden" name="origin" value="list">
+
+    <div class="fields-container">
+      <p><%= list.name %></p>
+
+      <%= f.input :invitation_to_id, label: "Share List with (email)", as: :email, input_html: { value: "#{params[:invitation][:invitation_to_id] if params[:invitation]}" } %>
+      <%= f.input :message %>
+
+      <div class="buttons">
+        <%= f.button :submit, "Send invitation", class: 'btn btn-confirm' %>
+        <div class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</div>
+      </div>
+    </div>
+<% end %>

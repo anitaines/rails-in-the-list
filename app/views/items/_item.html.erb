@@ -1,0 +1,77 @@
+<li class="item" data-new-item-list-target="item" data-controller="update-item">
+
+  <%= simple_form_for [item],
+        html: {
+          class: 'edit-form',
+          data: {
+            update_item_target: 'form'
+          }
+        } do |f| %>
+
+    <div class="purchased"> 
+      <label>
+        <%= f.input_field :purchased, data: { action: 'change->update-item#submitForm' } %>
+        <i class="fa-regular fa-circle"></i>
+        <i class="fa-solid fa-circle-check"></i>
+      </label>
+    </div>
+    
+    <div class="name">
+      <%= f.input_field  :name, data: { action: 'change->update-item#submitForm' }, class: item.errors[:name].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+    <div class="amount">
+      <%= f.input_field  :amount, data: { action: 'change->update-item#submitForm' }, class: item.errors[:amount].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+    <div class="comment">
+      <%= f.input_field  :comment, rows: '1', data: { action: 'change->update-item#submitForm' }, class: item.errors[:comment].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+ <% end %>
+
+  <div class="actions">
+    <% if policy(item).destroy? %>
+        <%= button_to item_path(item),
+          form: { 
+            "data-name" => item.name,
+            "data-action" => "submit->update-item#deleteItem",
+            "data-update-item-target" => "deleteForm" },
+          method: :delete do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %>
+    <% end %>
+  </div>
+
+  <% if item.purchased %>
+    <div class="purchased-info-container">
+      <div class="purchased"></div>
+      <div class="purchased-info">
+        <p>Done by </p>
+        <% if item.user.avatar.attached? %>
+          <%= cl_image_tag item.user.avatar.key, class: "avatar" %>
+        <% else %>
+          <div class="no-avatar bg-yellow">
+            <i class="fa-solid fa-user"></i>
+          </div>
+        <% end %>
+        <p><%= item.user.first_name %>
+        <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p")  %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
+    <% item.errors.messages.each do |key, value| %>
+      <p><%= "- Error in #{key}: #{value.first}." %></p>   
+    <% end %>
+  </div>
+
+  <div class="item-updating d-none" data-update-item-target="updating">
+    <div class="loader">
+      <svg viewBox="25 25 50 50">
+        <circle cx="50" cy="50" r="20"></circle>
+      </svg>
+    </div>
+  </div>
+</li>

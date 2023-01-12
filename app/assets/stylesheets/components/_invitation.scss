@@ -1,0 +1,46 @@
+.invitation {
+  width: 49%;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background-color: white;
+  padding: 16px;
+  margin: 5px;
+
+  .invitation-from {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .invitation-from img, .invitation-from .no-avatar {
+    margin-right: 5px;
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0px;
+  }
+
+  .name {
+    font-weight: bold;
+    color: $turquoise;
+    text-align: center;
+  }
+
+  .message {
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  }
+}

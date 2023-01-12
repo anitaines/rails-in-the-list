@@ -1,83 +1,68 @@
-<h1><%= @list.name %></h1>
-<p><%= @list.comment %></p>
+<% colors = ["#3b7d87", "#fd712c", "#66ac8f"] %>
+<%#           turquoise, orange,    green %>
 
-<p>Users:</p>
+<div class="list-container">
 
-<ul>
-  <% @list.users.each do |user| %>
-    <li><%= user.first_name %></li>
+  <% if @list.image.attached? %>
+    <div class="bg-image" style="background-image: linear-gradient(rgba(254,225,119,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @list.image.key %>')"></div>
+  <% else %>
+    <div class="bg-image"></div>
   <% end %>
-</ul>
 
-<p>Add user:</p>
-<%= simple_form_for [@list, @invitation] do |f| %>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="list-details col-6">
+        <p class="name">
+          <%= @list.name %>
 
-  <%= f.error_notification %>
-  <%# <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %> %>
+          <%= link_to edit_list_path(@list), class: "actions" do %>
+            <span><i class="fa-solid fa-pen"></i></span>
+            <span><i class="fa-solid fa-trash-can"></i></span>
+          <% end %>
+        </p>
+        <% unless @list.comment.blank? %>
+          <p class="comment"><%= @list.comment %></p>
+        <% end %>
+      </div>
+    <div class="col-3"></div>
+  </div>
 
-  <%= f.input :invitation_to_id, as: :email, input_html: { value: "#{params[:invitation][:invitation_to_id] if params[:invitation]}" } %>
-  <%= f.input :message %>
+  
+  <div class="row mt-3 align-items-start"> <%# 2 columns: users & list %>
 
-  <%= f.button :submit, class: "btn btn-warning" %>
+    <div class="col-3"></div>
 
-<% end %>
+    <div class="list col-6" data-controller="new-item-list">
+
+      <div class="list-heading">
+        <div class="purchased"></div>
+        <div class="name">Name</div>
+        <div class="amount">Qt.</div>
+        <div class="comment">Comment</div>
+        <div class="actions"></div>
+      </div>
+
+      <p class="empty d-none" data-new-item-list-target="emptyListText">List is empty</p>
+      
+      <ul class="list-content">
+
+        <% @list.items.each do |item| %>
+          <%= render partial: "items/item", locals: { item: item } %>    
+        <% end %>
+
+        <%= render partial: "items/new_item", locals: { list: @list, item: @item } %>
+
+      </ul>
+
+    </div>
 
 
-<% if @list.image.attached? %>
-  <%= cl_image_tag @list.image.key, class: "", alt: "" %>
-<% else %>
-  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "", alt: "" %>
-<% end %>
+    <div class="users col-3"  data-controller="new-invitation" data-new-invitation-target="users">
 
-<p>Current user is Admin?: <%= @admin %></p>
+      <%= render partial: "users", locals: { list: @list, invitation: @invitation } %>
 
-<% if policy(@list).destroy? %>
-  <%= link_to "Delete List",
-    list_path(@list),
-    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-  %>
-<% end %>
+    </div>
 
-<p>Add item</p>
+  </div>
 
-<%= simple_form_for [@list, @item] do |f| %>
-
-  <%= f.error_notification %>
-  <%# <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %> %>
-
-  <%= f.input :name %>
-  <%= f.input :amount %>
-  <%= f.input :comment %>
-
-  <%= f.button :submit, class: "btn btn-warning" %>
-
-<% end %>
-
-<p>Items in the list:</p>
-
-<ul>
-  <% @list.items.each do |item| %>
-    <li><%= item.name %></li>
-
-    <%= simple_form_for [item] do |f| %>
-
-      <%= f.error_notification %>
-      <%# <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %> %>
-
-      <%= f.input :purchased %>
-      <%= f.input :name %>
-      <%= f.input :amount %>
-      <%= f.input :comment %>
-
-      <%= f.button :submit, class: "btn btn-warning" %>
-
-    <% end %>
-
-    <% if policy(item).destroy? %>
-      <%= link_to "Delete Item",
-        item_path(item),
-        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-      %>
-    <% end %>
-  <% end %>
-</ul>
+</div>

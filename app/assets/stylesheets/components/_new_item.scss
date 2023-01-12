@@ -1,0 +1,59 @@
+.new-item-form {
+  display: flex;
+  background-color: $turquoise;
+  color: white;
+  padding: 10px 10px;
+  // padding: 10px 5px;
+}
+.new-item-form .new {
+  width: 10%;
+  border-right: 2px solid $turquoise;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 5px 5px 0px;
+}
+.new-item-form .name {
+  width: 40%;
+  border-right: 2px solid $turquoise;
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 5px 0px;
+}
+.new-item-form .amount {
+  width: 15%;
+  border-right: 2px solid $turquoise;
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 5px 0px;
+}
+.new-item-form .comment {
+  width: 35%;
+  border-right: 2px solid $turquoise;
+  display: flex;
+  align-items: center;
+  padding: 5px 5px 5px 0px;
+}
+.new-item-form .actions {
+  width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+.new-item-form .actions button {
+  display: flex;
+}
+.new-item-form input, .new-item-form textarea {
+  width: 100%;
+  flex-grow: 1;
+  background-color: #ffffff !important;
+  padding: 5px;
+}
+.new-item-form textarea {
+  min-height: unset;
+}
+.new-item-form .fa-circle-plus {
+  font-size: 24px;
+  color: #ffffff;
+}

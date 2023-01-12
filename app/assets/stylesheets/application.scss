@@ -10,3 +10,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+// General settings
+body {
+  background-color: rgba(254, 225, 119, 0.1);
+} 
+
+.container-lg {
+  margin-top: 110px;
+}

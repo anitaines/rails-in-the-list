@@ -4,5 +4,23 @@
 
 import { application } from "./application"
 
+import AdjustContentController from "./adjust_content_controller"
+application.register("adjust-content", AdjustContentController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import NewInvitationController from "./new_invitation_controller"
+application.register("new-invitation", NewInvitationController)
+
+import NewItemDashboardController from "./new_item_dashboard_controller"
+application.register("new-item-dashboard", NewItemDashboardController)
+
+import NewItemListController from "./new_item_list_controller"
+application.register("new-item-list", NewItemListController)
+
+import RemoveUserController from "./remove_user_controller"
+application.register("remove-user", RemoveUserController)
+
+import UpdateItemController from "./update_item_controller"
+application.register("update-item", UpdateItemController)

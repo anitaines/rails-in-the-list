@@ -1,0 +1,27 @@
+<div class="invitation">
+
+  <div class="invitation-from">
+    <% if invitation.invitation_from.avatar.attached? %>
+      <%= cl_image_tag invitation.invitation_from.avatar.key, class: "avatar-large" %>
+    <% else %>
+      <div class="no-avatar bg-yellow no-avatar-large">
+        <i class="fa-solid fa-user"></i>
+      </div>
+    <% end %>
+    <p><span><%= invitation.invitation_from.first_name %></span> invited you to share the List:</p>
+  </div>
+
+  <p class="name"><%= invitation.list.name %></p>
+
+  <% unless invitation.message.blank?  %>
+    <p class="fst-italic message">"<%= invitation.message %>"</p>
+  <% end %>
+
+  <div class="buttons">
+    <%= button_to "Accept", accept_invitation_path(invitation), method: :post, class: 'btn btn-confirm' %>
+    <%= button_to "Reject", invitation, method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, params: { origin: 'dashboard' }, class: 'btn btn-cancel' %>
+  </div>
+
+</div>
+
+    
