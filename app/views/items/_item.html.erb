@@ -55,8 +55,11 @@
             <i class="fa-solid fa-user"></i>
           </div>
         <% end %>
-        <p><%= item.user.first_name %>
-        <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p")  %></p>
+        <p>
+          <%= item.user.first_name %> - 
+          <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
+          <%= item.purchased_date_humanized %>
+        </p>
       </div>
     </div>
   <% end %>
