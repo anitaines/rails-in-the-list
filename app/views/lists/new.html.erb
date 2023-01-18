@@ -1,10 +1,14 @@
-<%= simple_form_for(@list) do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :name,
-              autofocus: true,
-              input_html: { autocomplete: "name" }%>
-  <%= f.input :comment %>
-  <%= f.input :image,
-              input_html: { accept: "image/png, image/jpeg" } %>
-  <%= f.submit %>
+<%= link_to lists_path, class: "btn btn-outline-dark" do %>
+  <i class="fa-solid fa-chevron-left"></i>
+  All Lists
 <% end %>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+
+    <h2>Create List</h2>
+
+    <%= render partial: "lists/list_form", locals: { list: @list } %>  
+
+  </div>
+</div>

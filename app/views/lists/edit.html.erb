@@ -1,10 +1,42 @@
-<%= simple_form_for(@list) do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :name,
-              autofocus: true,
-              input_html: { autocomplete: "name" }%>
-  <%= f.input :comment %>
-  <%= f.input :image,
-              input_html: { accept: "image/png, image/jpeg" } %>
-  <%= f.submit %>
-<% end %>
+
+<div class="row justify-content-between">
+
+  <div class="col">
+    <%= link_to list_path(@list), class: "btn btn-outline-dark" do %>
+      <i class="fa-solid fa-chevron-left"></i>
+      Back to List
+    <% end %>
+  </div>
+
+  <div class="col text-end">
+    <% if policy(@list).destroy? %>
+      <%= link_to list_path(@list),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to delete \"#{@list_name}\"? This action can't be undone"},
+        class: "btn btn-outline-warning" do %>
+          <i class="fa-solid fa-trash-can"></i>
+          Delete List
+      <% end %>
+    <% else %>
+      <button type="button" class="btn btn-outline-secondary" disabled>
+        <i class="fa-solid fa-trash-can"></i>
+        Delete List
+      </button>
+      <p class="m-0">It's not possible to delete this List.</p>
+      <p class="m-0">Only the user who created the List, can delete it.</p>
+    <% end %>
+  </div>
+
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-5">
+
+    <h2>Update <%= @list_name %></h2>
+
+    <%= render partial: "lists/list_form", locals: { list: @list } %>  
+
+  </div>
+</div>
+
+
+

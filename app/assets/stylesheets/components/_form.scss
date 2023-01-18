@@ -27,3 +27,31 @@
     justify-content: center;
   }
 }
+
+.list-form, .account-form {
+  background-color: #ffffff;
+  padding: 50px 60px;
+  border: 1px solid $turquoise;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  margin-bottom: 50px;
+}
+
+.current-img {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0 0 0 0;
+  }
+
+  .img.current-img {
+    background-size: cover;
+    background-position: center;
+    width: 100px;
+    height: 65px;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+}

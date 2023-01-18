@@ -42,15 +42,22 @@ class ListsController < ApplicationController
   # UPDATE - STEP 1, GET THE FORM (pre-filled with list attributes) for editing
   def edit
     # @list = List.find(params[:id])
+    @list_name = @list.name
     authorize @list
   end
 
   # UPDATE - STEP 2, PATCH THE FORM
   def update
     # @list = List.find(params[:id])
+    @list_name = @list.name
     authorize @list
 
     if @list.update(list_params)
+
+      if params["no_image"] && !params["list"]["image"]
+        @list.image.purge
+      end
+
       redirect_to list_path(@list)
     else
       render :edit, status: :unprocessable_entity
