@@ -11,7 +11,7 @@
   align-items: center;
 
   .fields-container {
-    width: 35%;
+    width: 90%;
     padding: 36px;
     background-color: white;
     border-radius: 5px;
@@ -26,15 +26,30 @@
     display: flex;
     justify-content: center;
   }
+
+  @media (min-width:768px){
+    .fields-container {
+      width: 50%;
+    }
+  }
+  @media (min-width:992px){
+    .fields-container {
+      width: 35%;
+    }
+  }
 }
 
 .list-form, .account-form, .sign-up-form, .log-in-form, .forgot-password-form {
   background-color: #ffffff;
-  padding: 50px 60px;
+  padding: 40px 30px;
   border: 1px solid $turquoise;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   margin-bottom: 50px;
+
+  @media (min-width:992px){
+    padding: 50px 60px;
+  }
 }
 
 .current-img {

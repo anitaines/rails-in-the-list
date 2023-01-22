@@ -1,17 +1,17 @@
-<% colors = ["#3b7d87", "#fd712c", "#66ac8f"] %>
-<%#           turquoise, orange,    green %>
+<% colors = ["rgba(253, 113, 44, 0.4)", "rgba(254, 225, 119, 0.4)"] %>
+<%#           orange,                    yellow %>
 
 <div class="list-container">
 
   <% if @list.image.attached? %>
-    <div class="bg-image" style="background-image: linear-gradient(rgba(254,225,119,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @list.image.key %>')"></div>
+    <div class="bg-image" style="background-image: linear-gradient(rgba(254,225,119,0.3), rgba(255,255,255,0.3)), url('<%= cl_image_path @list.image.key %>')"></div>
   <% else %>
-    <div class="bg-image"></div>
+    <div class="bg-image" style="background-color: <%= colors[rand(0..1)] %>"></div>
   <% end %>
 
   <div class="row">
-    <div class="col-3"></div>
-    <div class="list-details col-6">
+    <div class="col-0 col-md-3"></div>
+    <div class="list-details col-0 col-md-6">
         <p class="name">
           <%= @list.name %>
 
@@ -24,15 +24,15 @@
           <p class="comment"><%= @list.comment %></p>
         <% end %>
       </div>
-    <div class="col-3"></div>
+    <div class="col-0 col-md-3"></div>
   </div>
 
   
-  <div class="row mt-3 align-items-start"> <%# 2 columns: users & list %>
+  <div class="row mt-3 mb-5 align-items-start justify-content-center"> <%# 2 columns: users & list %>
 
-    <div class="col-3"></div>
+    <div class="col-0 col-md-0 col-lg-3"></div> <%# (first div is just for styling) %>
 
-    <div class="list col-6" data-controller="new-item-list">
+    <div class="list col-11 col-md-8 col-lg-6" data-controller="new-item-list">
 
       <div class="list-heading">
         <div class="purchased"></div>
@@ -57,7 +57,7 @@
     </div>
 
 
-    <div class="users col-3"  data-controller="new-invitation" data-new-invitation-target="users">
+    <div class="users col-11 col-md-8 col-lg-3"  data-controller="new-invitation" data-new-invitation-target="users">
 
       <%= render partial: "users", locals: { list: @list, invitation: @invitation } %>
 

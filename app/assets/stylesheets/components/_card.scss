@@ -1,10 +1,10 @@
 .list-card {
-  width: 49%;
   overflow: hidden;
   background: white;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   margin: 5px;
+  padding: 0;
 }
 
 .list-card a {
@@ -46,21 +46,6 @@
 
 .list-card .card-infos {
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-items: center;
-  flex-grow: 1;
-  flex-wrap: wrap;
-}
-
-.list-card .users {
-  width: 60%;
-}
-
-.list-card .add-item {
-  width: 25%;
-  text-align: right;
 }
 
 .list-card .users .btn, .list-card .add-item .btn {

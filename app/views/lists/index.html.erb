@@ -1,11 +1,11 @@
 
-<div class="dashboard" data-controller="adjust-content">
+<div class="dashboard row" data-controller="adjust-content">
 
   <% current_user.invitations_to.each do |invitation| %>
     <%= render partial: "invitation", locals: {invitation: invitation} %>
   <% end %>
 
-  <%= link_to new_list_path, class: "new-list" do %>
+  <%= link_to new_list_path, class: "new-list col-12 col-md-5" do %>
     <i class="fa-regular fa-file-lines"></i>
     Create New List
   <% end %>
@@ -13,5 +13,7 @@
   <% @lists.each do |list| %>
     <%= render partial: "card", locals: { list: list, invitation: @invitation, item: @item } %>
   <% end %>
+
+  <div class="list-card col-12 col-md-5 opacity-0" data-adjust-content-target="adjust"></div>
 
 </div>

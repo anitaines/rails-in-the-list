@@ -1,7 +1,7 @@
 <% colors = ["#3b7d87", "#fd712c", "#66ac8f"] %>
 <%#           turquoise, orange,    green %>
 
-<div class="list-card"  data-controller="new-invitation new-item-dashboard" data-new-invitation-target="card" data-new-item-dashboard-target="card">
+<div class="list-card col-12 col-md-5"  data-controller="new-invitation new-item-dashboard" data-new-invitation-target="card" data-new-item-dashboard-target="card">
 
   <%= link_to(list_path(list)) do %>
     <% if list.image.attached? %>
@@ -28,9 +28,9 @@
   <% end %>
   
   
-  <div class="card-infos">
+  <div class="card-infos row">
 
-    <div class="users">
+    <div class="users col-12 col-lg-8 text-center text-lg-start">
       <% list.users.each do |user| %>
 
         <% if user.avatar.attached? %>
@@ -61,7 +61,7 @@
       </div>
     </div>
 
-    <div class="add-item">
+    <div class="add-item col-12 col-lg-4 text-center text-lg-end">
       <div class="btn" data-action="click->new-item-dashboard#displayForm">
         <i class="fa-solid fa-circle-plus"></i>
         Add Item

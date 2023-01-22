@@ -45,21 +45,19 @@
 
   <% if item.purchased %>
     <div class="purchased-info-container">
-      <div class="purchased"></div>
+      <div class="purchased d-none d-lg-block"></div>
       <div class="purchased-info">
-        <p>Done by </p>
+        Done by 
         <% if item.user.avatar.attached? %>
           <%= cl_image_tag item.user.avatar.key, class: "avatar" %>
         <% else %>
-          <div class="no-avatar bg-yellow">
+          <span class="no-avatar bg-yellow">
             <i class="fa-solid fa-user"></i>
-          </div>
+          </span>
         <% end %>
-        <p>
-          <%= item.user.first_name %> - 
-          <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
-          <%= item.purchased_date_humanized %>
-        </p>
+        <%= item.user.first_name %> - 
+        <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
+        <%= item.purchased_date_humanized %>
       </div>
     </div>
   <% end %>

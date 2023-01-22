@@ -1,5 +1,4 @@
 .invitation {
-  width: 49%;
   min-height: 230px;
   display: flex;
   flex-direction: column;
@@ -18,6 +17,7 @@
 
   .invitation-from img, .invitation-from .no-avatar {
     margin-right: 5px;
+    flex: none;
   }
 
   span {
