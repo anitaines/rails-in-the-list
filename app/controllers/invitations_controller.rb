@@ -63,7 +63,10 @@ class InvitationsController < ApplicationController
     @invitation.destroy
 
     if params[:origin] == "dashboard"
-      redirect_to user_root_path, status: :see_other
+      respond_to do |format|
+        format.html { redirect_to user_root_path, status: :see_other }
+        format.json { render json: { invitation: 'deleted' } } # json version
+      end
     elsif params[:origin] == "list"
       respond_to do |format|
         format.html { redirect_to list_path(@list), status: :see_other }

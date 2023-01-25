@@ -22,5 +22,8 @@ application.register("new-item-list", NewItemListController)
 import RemoveUserController from "./remove_user_controller"
 application.register("remove-user", RemoveUserController)
 
+import SweetAlertController from "./sweet_alert_controller"
+application.register("sweet-alert", SweetAlertController)
+
 import UpdateItemController from "./update_item_controller"
 application.register("update-item", UpdateItemController)

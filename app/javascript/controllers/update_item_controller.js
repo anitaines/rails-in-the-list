@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
+import swal from 'sweetalert';
 
 // Connects to data-controller="update-item"
 export default class extends Controller {
@@ -28,16 +29,23 @@ export default class extends Controller {
     event.preventDefault();
     const itemName = this.deleteFormTarget.dataset.name;
 
-    if (confirm(`Delete ${itemName}?`)){
-      
-      const url = this.deleteFormTarget.action;
+    swal({
+      text: `Delete ${itemName}?`,
+      icon: "warning",
+      buttons: ["No", "Yes"],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
 
-      fetch(url, {
-        method: "DELETE",
-        // headers: { "Accept": "text/plain" },
-        headers: {"Accept": "application/json"}, // receives json from backend
-        body: new FormData(this.deleteFormTarget)
-      })
+        const url = this.deleteFormTarget.action;
+
+        fetch(url, {
+          method: "DELETE",
+          // headers: { "Accept": "text/plain" },
+          headers: {"Accept": "application/json"}, // receives json from backend
+          body: new FormData(this.deleteFormTarget)
+        })
         // .then(response => response.text())
         .then(response => response.json())
         .then((data) => {
@@ -50,7 +58,16 @@ export default class extends Controller {
             }  
           }
         })
-    }
+        .catch(err => {
+          if (err) {
+            swal("Oh noes!", "Something went wrong, please refresh and try again", "error");
+          } else {
+            swal.stopLoading();
+            swal.close();
+          }
+        });
+      }
+    });
   }
 
 }

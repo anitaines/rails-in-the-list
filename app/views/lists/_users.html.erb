@@ -20,7 +20,8 @@
         class: "btn btn-sm btn-outline-secondary",
         form: { 
           "data-question" => current_user == user_list.user ? "Do you want to exit this list?" : "Remove #{ user_list.user.first_name } from this list?",
-          "data-action" => "submit->remove-user#deleteUserList" },
+          "data-action" => "submit->remove-user#deleteUserList",
+          "data-remove-user-target" => "removeUserForm" },
         method: :delete do %>
           <% if current_user == user_list.user %>
             Exit List
@@ -54,7 +55,8 @@
         class: "btn btn-sm btn-outline-secondary",
         form: { 
           "data-question" => "Cancel #{ invitation.invitation_to.first_name }'s invitation to this list?",
-          "data-action" => "submit->remove-user#deleteInvitation" },
+          "data-action" => "submit->remove-user#deleteInvitation",
+          "data-remove-user-target" => "cancelInvitationForm" },
         params: { origin: 'list' },
         method: :delete do %>
           Cancel invitation

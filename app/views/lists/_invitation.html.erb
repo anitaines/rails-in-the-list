@@ -1,4 +1,4 @@
-<div class="invitation col-12 col-md-5">
+<div class="invitation col-12 col-md-5" data-controller="remove-user">
 
   <div class="invitation-from">
     <% if invitation.invitation_from.avatar.attached? %>
@@ -19,7 +19,18 @@
 
   <div class="buttons">
     <%= button_to "Accept", accept_invitation_path(invitation), method: :post, class: 'btn btn-confirm' %>
-    <%= button_to "Reject", invitation, method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } }, params: { origin: 'dashboard' }, class: 'btn btn-cancel' %>
+    
+    <%= button_to invitation_path(invitation),
+      class: "btn btn-cancel",
+      form: { 
+        "data-question" => "Reject #{ invitation.invitation_from.first_name }'s invitation to the list \"#{ invitation.list.name }?\"",
+        "data-action" => "submit->remove-user#rejectInvitation",
+        "data-remove-user-target" => "rejectInvitationForm" },
+      params: { origin: 'dashboard' },
+      method: :delete do %>
+        Reject
+    <% end %>
+
   </div>
 
 </div>
