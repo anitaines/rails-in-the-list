@@ -8,7 +8,8 @@ export default class extends Controller {
   //   console.log("Hello from new-invitation");
   // }
 
-  displayForm() {
+  displayForm(event) {
+    event.preventDefault();
     this.formTarget.classList.remove("d-none");
   }
 

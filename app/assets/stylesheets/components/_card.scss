@@ -10,6 +10,12 @@
 .list-card a {
   text-decoration: none;
 }
+.list-card a:hover, .list-card a:focus-visible{
+  outline: none;
+}
+.list-card a:hover .card-image, .list-card a:focus-visible .card-image{
+  border: 2px solid black;
+}
 
 .card-image {
   background-size: cover;
@@ -19,6 +25,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .card-image p {
@@ -55,4 +62,11 @@
     margin-right: 5px;
     font-size: 28px;
   }
+}
+.list-card .users .btn:hover,
+.list-card .users .btn:focus-visible,
+.list-card .add-item .btn:hover,
+.list-card .add-item .btn:focus-visible {
+  outline: none;
+  background-color: $yellow;
 }

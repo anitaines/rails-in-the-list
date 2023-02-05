@@ -65,10 +65,10 @@
   
 <% end %>
 
-<div class="btn btn-info" data-action="click->new-invitation#displayForm">
+<a href="" class="btn btn-info" data-action="click->new-invitation#displayForm">
   <i class="fa-solid fa-share-nodes"></i>
   Share List
-</div>
+</a>
 
 <%# Share List form %>
 <%= simple_form_for [list, invitation],
@@ -90,7 +90,7 @@
 
       <div class="buttons">
         <%= f.button :submit, "Send invitation", class: 'btn btn-confirm' %>
-        <div class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</div>
-      </div>
+        <button type="reset" class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</div>
+      </button>
     </div>
 <% end %>

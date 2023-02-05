@@ -14,3 +14,13 @@
 .navbar-lewagon .navbar-brand img {
   width: 175px;
 }
+
+.navbar-brand:focus-visible {
+  outline: none;
+  border-bottom: 2px solid black;
+}
+
+.navbar-btn:hover, .navbar-btn:focus-visible {
+  outline: 2px solid black;
+  box-shadow: none;
+}

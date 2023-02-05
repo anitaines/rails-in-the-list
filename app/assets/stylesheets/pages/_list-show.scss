@@ -41,6 +41,12 @@
     right: 0px;
   }
 }
+.list-details .actions:focus-visible {
+  outline: none;
+}
+.list-details .actions:hover span, .list-details .actions:focus-visible span {
+  background-color: $turquoise;
+}
 .list-details .actions span {
   width: 40px;
   height: 40px;

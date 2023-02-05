@@ -82,7 +82,10 @@
   background-color: #ffffff;
   border-radius: 50%;
 }
-.item .purchased input, .item  .purchased .fa-circle-check {
+.item .purchased input {
+  opacity: 0;
+}
+.item  .purchased .fa-circle-check {
   display: none;
 }
 .item .purchased #item_purchased:checked  ~ .fa-circle-check{
@@ -90,6 +93,10 @@
 }
 .item .purchased #item_purchased:checked  ~ .fa-circle{
   display: none;
+}
+.item .purchased label:focus-within i {
+  border: 2px solid black;
+  border-radius: 50%;
 }
 
 .item .actions button {
@@ -99,7 +106,11 @@
 .item .actions i {
   color: $turquoise;
   font-size: 18px;
-} 
+}
+.item .actions button:focus-visible {
+  outline: 2px solid black;
+  border-radius: 5px;
+}
 
 .purchased-info-container {
   display: flex;

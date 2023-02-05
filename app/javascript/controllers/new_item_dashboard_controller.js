@@ -9,7 +9,8 @@ export default class extends Controller {
   //   console.log(this.formTarget);
   // }
 
-  displayForm() {
+  displayForm(event) {
+    event.preventDefault();
     this.formTarget.classList.remove("d-none");
   }
 

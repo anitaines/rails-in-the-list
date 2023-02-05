@@ -44,6 +44,10 @@
 .new-item-form .actions button {
   display: flex;
 }
+.new-item-form .actions button:focus-visible i {
+  border: 2px solid black;
+  border-radius: 50%;
+}
 .new-item-form input, .new-item-form textarea {
   width: 100%;
   flex-grow: 1;

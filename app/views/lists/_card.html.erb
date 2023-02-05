@@ -55,17 +55,17 @@
         
       <% end %>
 
-      <div class="btn" data-action="click->new-invitation#displayForm">
+      <a href="#" class="btn" data-action="click->new-invitation#displayForm">
         <i class="fa-solid fa-share-nodes"></i>
         Share List
-      </div>
+      </a>
     </div>
 
     <div class="add-item col-12 col-lg-4 text-center text-lg-end">
-      <div class="btn" data-action="click->new-item-dashboard#displayForm">
+      <a href="#" class="btn" data-action="click->new-item-dashboard#displayForm">
         <i class="fa-solid fa-circle-plus"></i>
         Add Item
-      </div>
+      </a>
     </div>
     
   </div>
@@ -91,7 +91,7 @@
 
         <div class="buttons">
           <%= f.button :submit, "Send invitation", class: 'btn btn-confirm' %>
-          <div class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</div>
+          <button type="reset" class='btn btn-cancel' data-action="click->new-invitation#hideForm">Cancel</button>
         </div>
       </div>
     <% end %>
@@ -118,7 +118,7 @@
 
         <div class="buttons">
           <%= f.button :submit, "Add Item", class: 'btn btn-confirm' %>
-          <div class='btn btn-cancel' data-action="click->new-item-dashboard#hideForm">Cancel</div>
+          <button type="reset" class='btn btn-cancel' data-action="click->new-item-dashboard#hideForm">Cancel</button>
         </div>
       </div>
 
