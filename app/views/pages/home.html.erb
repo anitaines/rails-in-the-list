@@ -1,2 +1,26 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="home">
+
+  <div class="text">
+    <h2>A web app to <span>share</span> lists<br>
+      and track their progress
+    </h2>
+    <p>Finally (another &#128514;) to-do app!</p>
+    <p>But this one was made by <a href="https://www.linkedin.com/in/gdi-ana-ines/" target="_blank" class="black-anchor">me</a>,<br>
+    to play with Ruby on Rails.</p>
+  </div>
+
+  <div class="screens-actions-container">
+    <div class="screens">
+      <%= image_tag "screen-desktop.png", alt: "screenshot of application, desktop version.", class: "screen-desktop" %>
+      <%= image_tag "screen-mobile.png", alt: "screenshot of application, mobile version.", class: "screen-mobile" %>
+    </div>
+    
+    <div class="actions">
+      <%= link_to "Create your account", new_user_registration_path, class: "btn btn-cat" %>
+      <div class="text-center mb-5">
+        <p>Already have an account? <%= link_to "Log In", new_user_session_path, class: "btn btn-success" %></p>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,1 +1,105 @@
-// Specific CSS for your home-page
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+    font-size: 37px;
+  }
+  h2 span {
+    color: $turquoise
+  }
+  p {
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .black-anchor {
+    color: black;
+  }
+
+  .screens-actions-container {
+    width: 100%;
+  }
+  .screens {
+    position: relative;
+    width: 80%;
+    margin: 30px auto;
+  }
+  .screen-desktop {
+    width: 100%;
+    border: 2px solid #e8e8e8;
+    border-radius: 5px;
+    filter: drop-shadow(0px 0px 15px rgba(0,0,0,0.2));
+  }
+  .screen-mobile {
+    width: 30%;
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    filter: drop-shadow(0px 0px 15px rgba(0,0,0,0.2));
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+  }
+
+  .btn-cat {
+    font-weight: 700;
+    background-color: $orange;
+    color: #ffffff;
+    padding: 10px 30px;
+    margin: 0 0 25px 0;
+  }
+  .btn-cat:hover, .btn-cat:focus-visible {
+    background-color: $turquoise;
+  }
+  .actions p {
+    font-size: 16px;
+    display: flex;
+    align-items: baseline;
+  }
+  .actions p a {
+    margin-left: 5px;
+  }
+}
+
+@media (min-width:920px){
+  .home {
+    flex-wrap: nowrap;
+
+    .text {
+      width: 40%;
+    }
+    h2 {
+      text-align: left;
+    }
+    p {
+      text-align: left;
+    }
+    .screens-actions-container {
+      width: 55%;
+    }
+    .screens {
+      width: 100%;
+      margin: 0;
+    }
+    .actions {
+      align-items: center;
+    }
+    .btn-cat {
+      margin: 25px 0px;
+    }
+  }
+}
