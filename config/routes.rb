@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-  # devise_for :users
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
+  authenticated :user do
+    root 'lists#index', :as => :authenticated_root
+  end
   root 'pages#home'
 
-  # get '/dashboard' => 'user_lists#index', :as => :user_root
   get '/lists' => 'lists#index', :as => :user_root
 
   resources :lists do
     resources :items, only: [:create]
     resources :invitations, only: [:create]
-    # resources :user_lists, only: [:create] # is this route being used?
   end
 
   resources :items, only: [:update, :destroy]

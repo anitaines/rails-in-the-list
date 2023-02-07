@@ -1,11 +1,11 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon pt-3 pb-3">
   <div class="container-fluid">
-  
-    <% if user_signed_in? %> <%# check if user is signed in or not %>
 
-      <%= link_to user_root_path, class: "navbar-brand" do %>
-        <%= image_tag "logo.svg", alt: "In the list logo." %>
-      <% end %>
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.svg", alt: "In the list logo." %>
+    <% end %>
+  
+    <% if user_signed_in? %>
 
       <div class="d-flex">
         <% if current_user.avatar.attached? %>
@@ -28,18 +28,13 @@
         </ul>
       </div>
 
-    <% else %> <%# user not signed in  %>
-
-      <%= link_to root_path, class: "navbar-brand" do %>
-        <%= image_tag "logo.svg", alt: "In the list logo." %>
-      <% end %>
+    <% else %>
 
       <div>
         <%= link_to "Log In", new_user_session_path, class: "btn btn-info fw-bold" %>
-        <%# <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success" %>
       </div>
 
-    <% end %> <%# user signed in or not evaluation%>
+    <% end %>
     
 
   </div>
