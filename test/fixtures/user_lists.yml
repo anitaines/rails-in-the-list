@@ -3,7 +3,19 @@
 one:
   user: one
   list: one
+  admin: false
 
 two:
+  user: one
+  list: two
+  admin: true
+
+three:
+  user: two
+  list: one
+  admin: true
+
+four:
   user: two
   list: two
+  admin: false

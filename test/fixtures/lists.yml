@@ -4,12 +4,12 @@ one:
   name: MyString
   latitude: 1.5
   longitude: 1.5
-  comments: MyText
+  comment: MyText
   status: MyString
 
 two:
   name: MyString
   latitude: 1.5
   longitude: 1.5
-  comments: MyText
+  comment: MyText
   status: MyString

@@ -5,8 +5,8 @@ one:
   amount: MyString
   comment: MyText
   list: one
-  bought: false
-  bought_date: 2022-12-12 15:51:50
+  purchased: true
+  purchased_date: 2022-12-12 15:51:50
   user: one
 
 two:
@@ -14,6 +14,6 @@ two:
   amount: MyString
   comment: MyText
   list: two
-  bought: false
-  bought_date: 2022-12-12 15:51:50
+  purchased: true
+  purchased_date: 2022-12-12 15:51:50
   user: two

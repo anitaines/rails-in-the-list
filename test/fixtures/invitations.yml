@@ -2,10 +2,10 @@
 
 one:
   list: one
-  user: one
-  user: one
+  invitation_from: one
+  invitation_to: two
 
 two:
   list: two
-  user: two
-  user: two
+  invitation_from: one
+  invitation_to: two
