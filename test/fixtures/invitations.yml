@@ -3,9 +3,5 @@
 one:
   list: one
   invitation_from: one
-  invitation_to: two
+  invitation_to: three
 
-two:
-  list: two
-  invitation_from: one
-  invitation_to: two
