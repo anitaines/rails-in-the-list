@@ -1,13 +1,13 @@
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
-  setup do
-    mark_test_start_time
-  end
+  # setup do
+  #   mark_test_start_time
+  # end
 
-  teardown do
-    record_test_duration
-  end
+  # teardown do
+  #   record_test_duration
+  # end
 
   test "invalid without first_name" do
     user = User.new(email: "test@mail.com", password: "123456")
