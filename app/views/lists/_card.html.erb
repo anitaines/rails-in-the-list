@@ -27,47 +27,51 @@
       </div>
   <% end %>
   
-  
+  <%# TODO: CHANGE LAYOUT FOR FIRST TIME USER %>
+  <%# ALSO: CHANGE COMMENT DISPLAY %>
   <div class="card-infos row">
+    <div class="col-12 col-lg-8">
+      <div class="users text-center text-lg-start">
+        <% list.users.each do |user| %>
 
-    <div class="users col-12 col-lg-8 text-center text-lg-start">
-      <% list.users.each do |user| %>
-
-        <% if user.avatar.attached? %>
-          <%= cl_image_tag user.avatar.key, class: "avatar" %>
-        <% else %>
-          <div class="no-avatar bg-yellow">
-            <i class="fa-solid fa-user"></i>
-          </div>
+          <% if user.avatar.attached? %>
+            <%= cl_image_tag user.avatar.key, class: "avatar" %>
+          <% else %>
+            <div class="no-avatar bg-yellow">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          <% end %>
+          
         <% end %>
-        
-      <% end %>
 
-      <% list.invitations.each do |invitation| %>
+        <% list.invitations.each do |invitation| %>
 
-        <% if invitation.invitation_to.avatar.attached? %>
-          <%= cl_image_tag invitation.invitation_to.avatar.key, class: "avatar pending-user" %>
-        <% else %>
-          <div class="no-avatar bg-yellow pending-user">
-            <i class="fa-solid fa-user"></i>
-          </div>
+          <% if invitation.invitation_to.avatar.attached? %>
+            <%= cl_image_tag invitation.invitation_to.avatar.key, class: "avatar pending-user" %>
+          <% else %>
+            <div class="no-avatar bg-yellow pending-user">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          <% end %>
+          
         <% end %>
-        
-      <% end %>
 
-      <a href="#" class="btn" data-action="click->new-invitation#displayForm">
-        <i class="fa-solid fa-share-nodes"></i>
-        Share List
-      </a>
+        <a href="#" class="btn" data-action="click->new-invitation#displayForm">
+          <i class="fa-solid fa-share-nodes"></i>
+          Share List
+        </a>
+      </div>
     </div>
 
-    <div class="add-item col-12 col-lg-4 text-center text-lg-end">
-      <a href="#" class="btn" data-action="click->new-item-dashboard#displayForm">
-        <i class="fa-solid fa-circle-plus"></i>
-        Add Item
-      </a>
-    </div>
-    
+    <div class="col-12 col-lg-4">
+      <div class="add-item text-center text-lg-end">
+        <a href="#" class="btn" data-action="click->new-item-dashboard#displayForm">
+          <i class="fa-solid fa-circle-plus"></i>
+          Add Item
+        </a>
+      </div>
+    </div> 
+
   </div>
 
 
