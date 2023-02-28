@@ -4,4 +4,9 @@ one:
   list: one
   invitation_from: one
   invitation_to: three
+  message: "messageOne"
 
+two:
+  list: two
+  invitation_from: one
+  invitation_to: three
