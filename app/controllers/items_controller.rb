@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
       @invitation = Invitation.new
 
       respond_to do |format|
-        format.html { redirect_to user_root_path }
+        format.html { redirect_to lists_path }
         format.text { render partial: "lists/card", locals: { list: @list, invitation: @invitation, item: @item }, formats: [:html] }
       end
 

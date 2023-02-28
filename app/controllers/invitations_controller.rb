@@ -25,7 +25,7 @@ class InvitationsController < ApplicationController
       @item = Item.new
 
       respond_to do |format|
-        format.html { redirect_to user_root_path }
+        format.html { redirect_to lists_path }
         format.text { render partial: "lists/card", locals: { list: @list, invitation: @invitation, item: @item }, formats: [:html] }
       end
 
@@ -64,7 +64,7 @@ class InvitationsController < ApplicationController
 
     if params[:origin] == "dashboard"
       respond_to do |format|
-        format.html { redirect_to user_root_path, status: :see_other }
+        format.html { redirect_to lists_path, status: :see_other }
         format.json { render json: { invitation: 'deleted' } } # json version
       end
     elsif params[:origin] == "list"

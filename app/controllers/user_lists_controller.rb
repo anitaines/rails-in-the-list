@@ -11,7 +11,7 @@ class UserListsController < ApplicationController
 
     if @user_list.user == current_user # => user is exiting the list
       respond_to do |format|
-        format.html { redirect_to user_root_path, status: :see_other }
+        format.html { redirect_to lists_path, status: :see_other }
         # format.text { render partial: "lists/users", locals: { list: @list, invitation: @invitation }, formats: [:html] }
         format.json { render json: { redirect: true } } # json version
       end
