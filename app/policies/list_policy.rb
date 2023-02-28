@@ -20,10 +20,12 @@ class ListPolicy < ApplicationPolicy
   end
 
   def destroy?
-    # UserList.where(user: user, list: record).first.admin # returns TRUE or FALSE
+    user_list = UserList.where(user: user, list: record)
 
-    # other way:
-    admin = UserList.where(list: record, admin: true).first.user
-    admin == user
+    unless user_list.empty?
+      user_list.first.admin # returns TRUE or FALSE
+    else
+      false
+    end
   end
 end
