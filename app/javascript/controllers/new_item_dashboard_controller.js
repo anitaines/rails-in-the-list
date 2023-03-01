@@ -18,19 +18,22 @@ export default class extends Controller {
     this.formTarget.classList.add("d-none");
     
     const nameInput = this.formTarget.querySelector('#item_name');
-    nameInput.value = '';
+    nameInput.setAttribute("value", "");
     nameInput.classList.remove('is-invalid');
     nameInput.removeAttribute("aria-invalid");
+    nameInput.classList.remove('is-valid');
 
     const amountInput = this.formTarget.querySelector('#item_amount');
-    amountInput.value = '';
-    amountInput.classList.remove('is-invalid');
+    amountInput.setAttribute("value", "");
+    amountInput.classList.remove('is-invalid'); 
     amountInput.removeAttribute("aria-invalid");
+    amountInput.classList.remove('is-valid');
 
     const commentInput = this.formTarget.querySelector('#item_comment');
-    commentInput.value = '';
+    commentInput.innerText = "";
     commentInput.classList.remove('is-invalid');
     commentInput.removeAttribute("aria-invalid");
+    commentInput.classList.remove('is-valid');
 
     const invalidFeedback = this.formTarget.querySelector('invalid-feedback');
 

@@ -17,13 +17,13 @@ export default class extends Controller {
     this.formTarget.classList.add("d-none");
     
     const emailInput = this.formTarget.querySelector('#invitation_invitation_to_id');
-    emailInput.value = '';
+    emailInput.setAttribute("value", "");
     emailInput.classList.remove('is-invalid');
     emailInput.classList.remove('is-valid');
     emailInput.removeAttribute("aria-invalid");
 
     const messageInput = this.formTarget.querySelector('#invitation_message');
-    messageInput.value = '';
+    messageInput.innerText = "";
     messageInput.classList.remove('is-invalid');
     messageInput.classList.remove('is-valid');
     messageInput.removeAttribute("aria-invalid");
