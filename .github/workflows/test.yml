@@ -39,11 +39,11 @@ jobs:
           node-version: "16"
       - name: Get Yarn cache directory path
         id: yarn-cache
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+        run: echo "DIR=$(yarn cache dir)" >> $GITHUB_OUTPUT
       - name: Setup cache key and directory for node_modules cache
         uses: actions/cache@v3
         with:
-          path: ${{ output.dir }}
+          path: ${{ steps.yarn-cache.outputs.DIR }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn install
         run: yarn install --frozen-lockfile
