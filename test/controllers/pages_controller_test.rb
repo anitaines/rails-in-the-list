@@ -5,14 +5,14 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     p root_url
     p root_path
     get root_path
-    p response.body
+    # p response.body
     assert_response :success
   end
 
   test "should get home II" do
     get root_path
     sleep 0.1
-    p response.body
+    # p response.body
     assert_response :success
   end
 end
