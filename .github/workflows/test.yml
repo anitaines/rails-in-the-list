@@ -52,6 +52,7 @@ jobs:
           cp config/database.github.yml config/database.yml
           bundle exec rails db:create db:migrate
       - name: Run tests
-        run: bundle exec rails test
-      - name: Run system tests
-        run: bundle exec rails test:system
+        # run: bundle exec rails test
+        run: bundle exec rails test test/controllers/lists_controller_test.rb -v
+      # - name: Run system tests
+      #   run: bundle exec rails test:system

@@ -9,7 +9,10 @@ class ListsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get lists_url
+    p lists_url
+    p lists_path
+    get lists_path
+    p assert_response :success
     assert_response :success
   end
 
