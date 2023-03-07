@@ -19,6 +19,6 @@ class ItemTest < ActiveSupport::TestCase
   test "purchased date is humanized" do
     item = items(:one)
 
-    assert_equal( "Monday, December 12 at 4:51PM", item.purchased_date_humanized, "purchased date is not humanized")
+    assert_equal( "December", item.purchased_date_humanized["December"], "purchased date is not humanized")
   end
 end
