@@ -54,7 +54,6 @@ jobs:
       - name: Precompile assets
         run: bundle exec rake assets:precompile RAILS_ENV=test
       - name: Run tests
-        # run: bundle exec rails test
-        run: bundle exec rails test test/controllers/pages_controller_test.rb
+        run: bundle exec rails test
       - name: Run system tests
         run: bundle exec rails test:system
