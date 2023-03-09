@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: rails_shopping_list_production
   username: rails_shopping_list
   password: <%= ENV["RAILS_SHOPPING_LIST_DATABASE_PASSWORD"] %>
