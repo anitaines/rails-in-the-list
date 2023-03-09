@@ -8,12 +8,10 @@
 
 puts 'Seeding started'
 
-puts 'Cleaning database...'
-User.destroy_all
-List.destroy_all
-# UserList.destroy_all
-# Item.destroy_all
-puts 'Cleaning done'
+# puts 'Cleaning database...'
+# User.destroy_all
+# List.destroy_all
+# puts 'Cleaning done'
 
 puts 'Creating users...'
 User.create!(first_name: 'User 1', email: 'user1@mail.com', password: '123456')
