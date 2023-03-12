@@ -24,3 +24,18 @@
   outline: 2px solid black;
   box-shadow: none;
 }
+
+.navbar-brand h1 {
+  margin: 0px;
+  font-size: 16px;
+}
+
+.logo-tag {
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(100%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
