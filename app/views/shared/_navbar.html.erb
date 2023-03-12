@@ -2,9 +2,12 @@
   <div class="container-fluid">
 
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "logo.svg", alt: "In the list logo." %>
+      <h1>
+        <%= image_tag "logo.svg", alt: "In the list logo." %>
+        <span class="logo-tag">In the List</span>
+      </h1>
     <% end %>
-  
+
     <% if user_signed_in? %>
 
       <div class="d-flex">

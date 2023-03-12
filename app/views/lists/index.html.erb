@@ -1,19 +1,32 @@
+<% if current_user.invitations_to.empty? && @lists.empty? %>
 
-<div class="dashboard row" data-controller="adjust-content">
+  <div class="abstract-bg-info-container row">
+    <%= link_to new_list_path, class: "new-list col-11 col-md-4" do %>
+      <i class="fa-regular fa-file-lines"></i>
+      Create New List
+    <% end %>
+  </div>
 
-  <% current_user.invitations_to.each do |invitation| %>
-    <%= render partial: "invitation", locals: {invitation: invitation} %>
-  <% end %>
+  <%= render partial: "abstract_bg" %>
 
-  <%= link_to new_list_path, class: "new-list col-12 col-md-5" do %>
-    <i class="fa-regular fa-file-lines"></i>
-    Create New List
-  <% end %>
+<% else %>
 
-  <% @lists.each do |list| %>
-    <%= render partial: "card", locals: { list: list, invitation: @invitation, item: @item } %>
-  <% end %>
+  <div class="dashboard row" data-controller="adjust-content">
 
-  <div class="list-card col-12 col-md-5 opacity-0" data-adjust-content-target="adjust"></div>
+    <% current_user.invitations_to.each do |invitation| %>
+      <%= render partial: "invitation", locals: {invitation: invitation} %>
+    <% end %>
 
-</div>
+    <%= link_to new_list_path, class: "new-list col-12 col-md-5" do %>
+      <i class="fa-regular fa-file-lines"></i>
+      Create New List
+    <% end %>
+
+    <% @lists.each do |list| %>
+      <%= render partial: "card", locals: { list: list, invitation: @invitation, item: @item } %>
+    <% end %>
+
+    <div class="list-card col-12 col-md-5 opacity-0" data-adjust-content-target="adjust"></div>
+
+  </div>
+<% end %>

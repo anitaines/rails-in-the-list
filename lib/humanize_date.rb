@@ -82,7 +82,8 @@ private
   end
 
   def today
-    "today at #{timeify}"
+    # "today at #{timeify}"
+    "today"
   end
 
   def timeify
@@ -94,7 +95,8 @@ private
   end
 
   def yesterday
-    "yesterday at #{timeify}"
+    # "yesterday at #{timeify}"
+    "yesterday"
   end
 
   def is_yesterday?
@@ -102,7 +104,8 @@ private
   end
 
   def this_week
-    "#{@created} at #{timeify}"
+    # "#{@created} at #{timeify}"
+    "#{@created}"
   end
 
   def this_week?
@@ -110,7 +113,8 @@ private
   end
 
   def last_week
-    "last #{@created} at #{timeify}"
+    # "last #{@created} at #{timeify}"
+    "last #{@created}"
   end
 
   def last_week?
@@ -118,6 +122,7 @@ private
   end
 
   def datetimefiesta
-    @date.strftime("%A, %B %e at%l:%M%p")
+    # @date.strftime("%A, %B %e at%l:%M%p")
+    @date.strftime("%A, %B %e")
   end
 end
