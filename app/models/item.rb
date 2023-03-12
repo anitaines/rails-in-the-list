@@ -12,6 +12,7 @@ class Item < ApplicationRecord
   validates :comment, length: { maximum: 255 }
 
   def purchased_date_humanized
-    pretty(self.purchased_date.getlocal)
+    # pretty(self.purchased_date.getlocal)
+    pretty(self.purchased_date)
   end
 end
