@@ -5,6 +5,10 @@
   padding: 10px 10px;
   // padding: 10px 5px;
 }
+.new-item-form.new-usual-item-form {
+  background-color: $orange;
+}
+
 .new-item-form .new {
   width: 10%;
   border-right: 2px solid $turquoise;
@@ -13,12 +17,18 @@
   justify-content: center;
   padding: 5px 5px 5px 0px;
 }
+.new-item-form.new-usual-item-form .new {
+  border-right: 2px solid $orange;
+}
 .new-item-form .name {
   width: 40%;
   border-right: 2px solid $turquoise;
   display: flex;
   align-items: center;
   padding: 5px 5px 5px 0px;
+}
+.new-item-form.new-usual-item-form .name {
+  border-right: 2px solid $orange;
 }
 .new-item-form .amount {
   width: 15%;
@@ -27,12 +37,18 @@
   align-items: center;
   padding: 5px 5px 5px 0px;
 }
+.new-item-form.new-usual-item-form .amount {
+  border-right: 2px solid $orange;
+}
 .new-item-form .comment {
   width: 35%;
   border-right: 2px solid $turquoise;
   display: flex;
   align-items: center;
   padding: 5px 5px 5px 0px;
+}
+.new-item-form.new-usual-item-form .comment {
+  border-right: 2px solid $orange;
 }
 .new-item-form .actions {
   width: 5%;

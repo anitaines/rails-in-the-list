@@ -1,22 +1,17 @@
-<li class="item" data-new-item-list-target="item" data-controller="update-item">
+<li class="item usual-item" data-new-item-list-target="item" data-controller="update-item">
 
   <%= simple_form_for [item],
         html: {
           class: 'edit-form',
           data: {
-            update_item_target: 'form',
-            name: item.name,
+            update_item_target: 'form'
           }
         } do |f| %>
 
-    <input type="hidden" name="origin" value="list-tab">
+    <input type="hidden" name="origin" value="usual-items-tab">
 
     <div class="purchased"> 
-      <label>
-        <%= f.input_field :purchased, data: { action: 'change->update-item#submitForm' } %>
-        <i class="fa-regular fa-circle"></i>
-        <i class="fa-solid fa-circle-check"></i>
-      </label>
+     
     </div>
     
     <div class="name">
@@ -32,35 +27,31 @@
     </div>
     
     <div class="active"> 
-      <label>
-        <%= f.input_field :active, data: { action: 'change->update-item#inactiveItem' } %>
-        <i class="fa-solid fa-xmark"></i>
-      </label>
-    </div>
+      <% if item.active %>
+          <div class="btn btn-outline-secondary disabled">Already in list</div>
+        <% else %>
+          <label>
+            <%= f.input_field :active, data: { action: 'change->update-item#submitForm' } %>
+            <div class="btn btn-outline-dark">Add to list</div>
+          </label>
+        <% end %>
+      </div>
+    
  <% end %>
 
   <div class="actions">
-
+    <% if policy(item).destroy? %>
+        <%= button_to item_path(item),
+          form: { 
+            "data-name" => item.name,
+            "data-action" => "submit->update-item#deleteItem",
+            "data-update-item-target" => "deleteForm" },
+          method: :delete do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %>
+    <% end %>
   </div>
 
-  <% if item.purchased %>
-    <div class="purchased-info-container">
-      <div class="purchased d-none d-lg-block"></div>
-      <div class="purchased-info">
-        Done by 
-        <% if item.user.avatar.attached? %>
-          <%= cl_image_tag item.user.avatar.key, class: "avatar" %>
-        <% else %>
-          <span class="no-avatar bg-yellow">
-            <i class="fa-solid fa-user"></i>
-          </span>
-        <% end %>
-        <%= item.user.first_name %> - 
-        <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
-        <%= item.purchased_date_humanized %>
-      </div>
-    </div>
-  <% end %>
 
   <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
     <% item.errors.messages.each do |key, value| %>
