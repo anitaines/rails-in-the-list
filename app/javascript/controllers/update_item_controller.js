@@ -101,7 +101,12 @@ export default class extends Controller {
             const items = document.querySelectorAll('.item');
             if (items.length == 0){
               document.querySelector('.list .empty').classList.remove('d-none');
-            }  
+            }
+
+            const usualItems = document.querySelectorAll('.usual-item');
+            if (usualItems.length == 0){
+              document.querySelector('.usual-items .empty').classList.remove('d-none');
+            } 
           }
         })
         .catch(err => {
