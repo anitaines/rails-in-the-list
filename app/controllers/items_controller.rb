@@ -33,6 +33,20 @@ class ItemsController < ApplicationController
         end
       end
 
+    elsif params[:origin] == "usual-items-tab"
+
+      @item.active = false
+
+      respond_to do |format|
+        format.html { redirect_to list_path(@list) }
+
+        if @item.save
+          format.text { render partial: "items/new_usual_item_result", locals: { list: @list, item: @item, new_item: Item.new }, formats: [:html] }
+        else
+          format.text { render partial: "items/new_usual_item", locals: { list: @list, item: @item }, formats: [:html] }
+        end
+      end
+
     end
 
   end
@@ -58,13 +72,23 @@ class ItemsController < ApplicationController
       @item.purchased_date = nil
     end
 
+    if item_params[:active] == '0'
+      params["item"][:purchased] = false
+      @item.user = nil
+      @item.purchased_date = nil
+    end
+
     @list = @item.list
 
     @item.update(item_params)
 
     respond_to do |format|
       format.html { redirect_to list_path(@list) }
-      format.text { render partial: "items/item", locals: { item: @item }, formats: [:html] }
+      if params[:origin] == "list-tab"
+        format.text { render partial: "items/item", locals: { item: @item }, formats: [:html] }
+      elsif params[:origin] == "usual-items-tab"
+        format.text { render partial: "items/usual_item", locals: { item: @item }, formats: [:html] }
+      end
     end
   end
 
@@ -86,6 +110,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :amount, :comment, :purchased)
+    params.require(:item).permit(:name, :amount, :comment, :purchased, :active)
   end
 end
