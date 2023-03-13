@@ -7,6 +7,9 @@ import { application } from "./application"
 import AdjustContentController from "./adjust_content_controller"
 application.register("adjust-content", AdjustContentController)
 
+import ChangeTabController from "./change_tab_controller"
+application.register("change-tab", ChangeTabController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
