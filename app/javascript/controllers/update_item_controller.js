@@ -4,9 +4,15 @@ import swal from 'sweetalert';
 // Connects to data-controller="update-item"
 export default class extends Controller {
   static targets = ['form', 'updating', 'deleteForm'];
+  static values = {
+    id: Number
+  }
 
   // connect() {
   //   console.log("Hello from update item");
+  //   console.log(this.element);
+  //   console.log(this.formTarget);
+  //   console.log(this.idValue);
   // }
 
   submitForm() {
@@ -16,59 +22,17 @@ export default class extends Controller {
 
     fetch(url, {
       method: "PATCH",
-      headers: { "Accept": "text/plain" },
+      headers: { "Accept": "application/json" },
       body: new FormData(this.formTarget)
     })
-      .then(response => response.text())
-      .then((data) => {
-        this.element.outerHTML = data;
-      })
-  }
+    .then(response => response.json())
+    .then((data) => {
+      document.querySelector(`#item-${this.idValue}`).outerHTML = data.updated_item;
 
-  inactiveItem(event) {
-    event.preventDefault();
+      document.querySelector(`#usual-item-${this.idValue}`).outerHTML = data.updated_usual_item;
 
-    const itemName = this.formTarget.dataset.name;
-
-    swal({
-      text: `Hide ${itemName}? You'll still be able to find it on the Usual items tab`,
-      icon: "warning",
-      buttons: ["No", "Yes"],
-      dangerMode: true,
+      this.checkEmptyDisclaimer();
     })
-    .then((willHide) => {
-      if (willHide) {
-
-        this.updatingTarget.classList.remove('d-none');
-
-        const url = this.formTarget.action;
-
-        fetch(url, {
-          method: "PATCH",
-          headers: { "Accept": "text/plain" },
-          body: new FormData(this.formTarget)
-        })
-        .then(response => response.text())
-        .then((data) => {
-          this.element.remove();
-
-          const items = document.querySelectorAll('.item');
-          if (items.length == 0){
-            document.querySelector('.list .empty').classList.remove('d-none');
-          }
-        })
-        .catch(err => {
-          if (err) {
-            swal("Oh noes!", "Something went wrong, please refresh and try again", "error");
-          } else {
-            swal.stopLoading();
-            swal.close();
-          }
-        });
-      } else {
-        event.target.checked = true;
-      }
-    });
   }
 
   deleteItem(event) {
@@ -97,16 +61,9 @@ export default class extends Controller {
         .then((data) => {
           if (data.item == 'deleted'){
             this.element.remove();
+            document.querySelector(`#item-${this.idValue}`).remove();
 
-            const items = document.querySelectorAll('.item');
-            if (items.length == 0){
-              document.querySelector('.list .empty').classList.remove('d-none');
-            }
-
-            const usualItems = document.querySelectorAll('.usual-item');
-            if (usualItems.length == 0){
-              document.querySelector('.usual-items .empty').classList.remove('d-none');
-            } 
+            this.checkEmptyDisclaimer();
           }
         })
         .catch(err => {
@@ -119,6 +76,22 @@ export default class extends Controller {
         });
       }
     });
+  }
+
+  checkEmptyDisclaimer() {
+    const items = document.querySelectorAll('.item:not(.usual-item)');
+    if (items.length == 0){
+      document.querySelector('.list .empty').classList.remove('d-none');
+    } else {
+      document.querySelector('.list .empty').classList.add('d-none');
+    }
+
+    const usualItems = document.querySelectorAll('.usual-item');
+    if (usualItems.length == 0){
+      document.querySelector('.usual-items .empty').classList.remove('d-none');
+    } else {
+      document.querySelector('.usual-items .empty').classList.add('d-none');
+    }
   }
 
 }

@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   include HumanizeDate
 
   scope :with_active_status, -> { where("active = true") }
+  scope :done, -> { where("purchased = true") }
 
   belongs_to :list
   belongs_to :user, optional: true

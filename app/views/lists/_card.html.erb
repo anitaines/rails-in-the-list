@@ -13,8 +13,8 @@
         <p><%= list.name %></p>
 
         <div class="status">
-          <% items_purchased_count =  list.items.where(purchased: true).count%>
-          <% items_count = list.items.count %>
+          <% items_purchased_count =  list.items.with_active_status.done.count%>
+          <% items_count = list.items.with_active_status.count %>
           <% if items_count.zero? %>
             <p>- List is empty -</p>
           <% elsif items_purchased_count == items_count %>
@@ -27,8 +27,6 @@
       </div>
   <% end %>
   
-  <%# TODO: CHANGE LAYOUT FOR FIRST TIME USER %>
-  <%# ALSO: CHANGE COMMENT DISPLAY %>
   <div class="card-infos row">
     <div class="col-12 col-lg-8">
       <div class="users text-center text-lg-start">

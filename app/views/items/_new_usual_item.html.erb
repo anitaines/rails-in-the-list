@@ -1,11 +1,11 @@
-<li data-new-item-list-target="li">
+<li data-new-item-list-target="formNewUsualItemContainer">
 
   <%= simple_form_for [list, item],
     html: {
       class: "new-item-form new-usual-item-form",
       data: {
-        new_item_list_target: "form",
-        action: 'submit->new-item-list#add'
+        new_item_list_target: "formUsualItem",
+        action: 'submit->new-item-list#addNewUsualItem'
       }
     } do |f| %>
 

@@ -1,4 +1,8 @@
-<li class="item usual-item" data-new-item-list-target="item" data-controller="update-item">
+<li class="item usual-item" 
+    id="usual-item-<%= item.id %>"
+    data-new-item-list-target="usualItem" 
+    data-controller="update-item"
+    data-update-item-id-value="<%= item.id %>">
 
   <%= simple_form_for [item],
         html: {
@@ -11,7 +15,7 @@
     <input type="hidden" name="origin" value="usual-items-tab">
 
     <div class="purchased"> 
-     
+      <%= f.input_field :purchased %>
     </div>
     
     <div class="name">
@@ -28,7 +32,10 @@
     
     <div class="active"> 
       <% if item.active %>
-          <div class="btn btn-outline-secondary disabled">Already in list</div>
+          <label>
+            <%= f.input_field :active %>
+            <div class="btn btn-outline-secondary disabled">Already in list</div>
+          </label>
         <% else %>
           <label>
             <%= f.input_field :active, data: { action: 'change->update-item#submitForm' } %>

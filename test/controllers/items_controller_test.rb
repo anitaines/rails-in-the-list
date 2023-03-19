@@ -16,7 +16,12 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to lists_url
 
     assert_difference('Item.count') do
-      post list_items_url(@list), params: { item: { name: "New Item B", amount: 10 }, origin: "list" }
+      post list_items_url(@list), params: { item: { name: "New Item B", amount: 10 }, origin: "list-tab" }
+    end
+    assert_redirected_to list_url(@list)
+
+    assert_difference('Item.count') do
+      post list_items_url(@list), params: { item: { name: "New Item C", amount: 10 }, origin: "usual-items-tab" }
     end
     assert_redirected_to list_url(@list)
   end

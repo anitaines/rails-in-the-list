@@ -34,7 +34,7 @@
 
     <div class="col-0 col-md-0 col-lg-3"></div> <%# (first div is just for styling) %>
 
-    <div class="col-11 col-md-8 col-lg-6 p-0" data-controller="change-tab">
+    <div class="col-11 col-md-8 col-lg-6 p-0" data-controller="change-tab new-item-list">
 
       <div class="list-tabs row">
         <a class="col-6 tab-list"  href="#" data-action="click->change-tab#showList" data-change-tab-target="tabList">List</a>
@@ -42,7 +42,7 @@
         <a  class="col-6 tab-usual-items" href="#" data-action="click->change-tab#showUsualItems" data-change-tab-target="tabUsualItems">Usual items</a>
       </div>
 
-      <div class="list" data-controller="new-item-list" data-change-tab-target="list">
+      <div class="list" data-change-tab-target="list">
         <div class="list-heading">
           <div class="purchased"></div>
           <div class="name">Name</div>
@@ -55,7 +55,7 @@
         
         <ul class="list-content">
 
-          <% @list.items.with_active_status.each do |item| %>
+          <% @list.items.each do |item| %>
             <%= render partial: "items/item", locals: { item: item } %>    
           <% end %>
 
@@ -64,7 +64,7 @@
         </ul>
       </div>
 
-      <div class="usual-items d-none" data-controller="new-item-list" data-change-tab-target="usualItems">
+      <div class="usual-items d-none" data-change-tab-target="usualItems">
         <div class="usual-items-heading">
           <div class="purchased"></div>
           <div class="name">Name</div>
@@ -73,7 +73,7 @@
           <div class="actions"></div>
         </div>
 
-        <p class="empty d-none" data-new-item-list-target="emptyListText">List is empty</p>
+        <p class="empty d-none" data-new-item-list-target="emptyUsualItemstText">List is empty</p>
         
         <ul class="list-content">
 
