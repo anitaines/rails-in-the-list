@@ -72,6 +72,8 @@ class ItemsTest < ApplicationSystemTestCase
 
     visit list_url(list)
 
+    find(".tab-usual-items").click
+
     find("li.item:first-child .fa-trash-can").click
     click_on "Yes"
 

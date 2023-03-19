@@ -8,13 +8,19 @@
     padding: 10px 5px;
   }
 }
-.item:nth-child(even) {
+.item.usual-item {
+ align-items: end;
+}
+
+.item:nth-of-type(even) {
   background-color: rgba(59, 125, 135, 0.3);
+}
+.item.usual-item:nth-child(even) {
+  background-color: rgba(253, 113, 44, 0.3);
 }
 
 .item .purchased {
   width: 10%;
-  // border-right: 2px solid $turquoise;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,28 +31,25 @@
   align-items: center;
 }
 .item .name {
-  width: 40%;
-  // border-right: 2px solid $turquoise;
+  width: 42%;
   display: flex;
   align-items: center;
   padding: 5px;
 }
 .item .amount {
   width: 15%;
-  // border-right: 2px solid $turquoise;
   display: flex;
   align-items: center;
   padding: 5px;
 }
 .item .comment {
-  width: 35%;
-  // border-right: 2px solid $turquoise;
+  width: 33%;
   display: flex;
   align-items: center;
   padding: 5px;
 }
 .item .actions {
-  width: 7%;
+  width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,7 +58,11 @@
 
 .item .edit-form {
   display: flex;
-  width: 93%;
+  width: 100%;
+}
+.item.item.usual-item .edit-form {
+  flex-wrap: wrap;
+  width: 90%;
 }
 
 .item input, .item textarea {
@@ -64,7 +71,7 @@
   flex-grow: 1;
   text-overflow: ellipsis;
 }
-.item:nth-child(even) input, .item:nth-child(even) textarea {
+.item input, .item textarea {
   background-color: transparent;
 }
 .item textarea {
@@ -99,13 +106,48 @@
   border-radius: 50%;
 }
 
+.item .active {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+.item.usual-item .active {
+  flex-grow: 1;
+  text-align: left;
+  display: block;
+  padding: 0px;
+}
+.item.usual-item .active div {
+  min-width: 135px;
+  margin-left: 10%;
+}
+
+.item .active label {
+  display: block;
+  cursor: pointer;
+}
+.item.usual-item .active label {
+  cursor: default;
+}
+
+.item .active .fa-xmark {
+  font-size: 26px;
+  color: $orange;
+}
+.item .active input {
+  // opacity: 0;
+  display: none;
+}
+
 .item .actions button {
   border: none;
   background: transparent;
 }
 .item .actions i {
-  color: $turquoise;
-  font-size: 18px;
+  color: $orange;
+  font-size: 22px;
 }
 .item .actions button:focus-visible {
   outline: 2px solid black;

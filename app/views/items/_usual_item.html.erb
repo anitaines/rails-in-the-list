@@ -1,0 +1,76 @@
+<li class="item usual-item" 
+    id="usual-item-<%= item.id %>"
+    data-new-item-list-target="usualItem" 
+    data-controller="update-item"
+    data-update-item-id-value="<%= item.id %>">
+
+  <%= simple_form_for [item],
+        html: {
+          class: 'edit-form',
+          data: {
+            update_item_target: 'form'
+          }
+        } do |f| %>
+
+    <input type="hidden" name="origin" value="usual-items-tab">
+
+    <div class="purchased"> 
+      <%= f.input_field :purchased %>
+    </div>
+    
+    <div class="name">
+      <%= f.input_field  :name, data: { action: 'change->update-item#submitForm' }, class: item.errors[:name].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+    <div class="amount">
+      <%= f.input_field  :amount, data: { action: 'change->update-item#submitForm' }, class: item.errors[:amount].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+    <div class="comment">
+      <%= f.input_field  :comment, rows: '1', data: { action: 'change->update-item#submitForm' }, class: item.errors[:comment].any? ? "form-control is-invalid" : "" %>
+    </div>
+    
+    <div class="active"> 
+      <% if item.active %>
+          <label>
+            <%= f.input_field :active %>
+            <div class="btn btn-outline-secondary disabled">Already in list</div>
+          </label>
+        <% else %>
+          <label>
+            <%= f.input_field :active, data: { action: 'change->update-item#submitForm' } %>
+            <div class="btn btn-outline-dark">Add to list</div>
+          </label>
+        <% end %>
+      </div>
+    
+ <% end %>
+
+  <div class="actions">
+    <% if policy(item).destroy? %>
+        <%= button_to item_path(item),
+          form: { 
+            "data-name" => item.name,
+            "data-action" => "submit->update-item#deleteItem",
+            "data-update-item-target" => "deleteForm" },
+          method: :delete do %>
+            <i class="fa-solid fa-trash-can"></i>
+          <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
+    <% item.errors.messages.each do |key, value| %>
+      <p><%= "- Error in #{key}: #{value.first}." %></p>   
+    <% end %>
+  </div>
+
+  <div class="item-updating d-none" data-update-item-target="updating">
+    <div class="loader">
+      <svg viewBox="25 25 50 50">
+        <circle cx="50" cy="50" r="20"></circle>
+      </svg>
+    </div>
+  </div>
+</li>

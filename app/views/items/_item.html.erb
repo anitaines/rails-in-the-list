@@ -1,78 +1,88 @@
-<li class="item" data-new-item-list-target="item" data-controller="update-item">
+<% if item.active %>
 
-  <%= simple_form_for [item],
-        html: {
-          class: 'edit-form',
-          data: {
-            update_item_target: 'form'
-          }
-        } do |f| %>
+  <li class="item" 
+      id="item-<%= item.id %>"
+      data-new-item-list-target="item" 
+      data-controller="update-item" 
+      data-update-item-id-value="<%= item.id %>">
 
-    <div class="purchased"> 
-      <label>
-        <%= f.input_field :purchased, data: { action: 'change->update-item#submitForm' } %>
-        <i class="fa-regular fa-circle"></i>
-        <i class="fa-solid fa-circle-check"></i>
-      </label>
-    </div>
-    
-    <div class="name">
-      <%= f.input_field  :name, data: { action: 'change->update-item#submitForm' }, class: item.errors[:name].any? ? "form-control is-invalid" : "" %>
-    </div>
-    
-    <div class="amount">
-      <%= f.input_field  :amount, data: { action: 'change->update-item#submitForm' }, class: item.errors[:amount].any? ? "form-control is-invalid" : "" %>
-    </div>
-    
-    <div class="comment">
-      <%= f.input_field  :comment, rows: '1', data: { action: 'change->update-item#submitForm' }, class: item.errors[:comment].any? ? "form-control is-invalid" : "" %>
-    </div>
-    
- <% end %>
+    <%= simple_form_for [item],
+          html: {
+            class: 'edit-form',
+            data: {
+              update_item_target: 'form',
+              name: item.name,
+            }
+          } do |f| %>
 
-  <div class="actions">
-    <% if policy(item).destroy? %>
-        <%= button_to item_path(item),
-          form: { 
-            "data-name" => item.name,
-            "data-action" => "submit->update-item#deleteItem",
-            "data-update-item-target" => "deleteForm" },
-          method: :delete do %>
-            <i class="fa-solid fa-trash-can"></i>
-          <% end %>
-    <% end %>
-  </div>
+      <input type="hidden" name="origin" value="list-tab">
 
-  <% if item.purchased %>
-    <div class="purchased-info-container">
-      <div class="purchased d-none d-lg-block"></div>
-      <div class="purchased-info">
-        Done by 
-        <% if item.user.avatar.attached? %>
-          <%= cl_image_tag item.user.avatar.key, class: "avatar" %>
-        <% else %>
-          <span class="no-avatar bg-yellow">
-            <i class="fa-solid fa-user"></i>
-          </span>
-        <% end %>
-        <%= item.user.first_name %> - 
-        <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
-        <%= item.purchased_date_humanized %>
+      <div class="purchased"> 
+        <label>
+          <%= f.input_field :purchased, data: { action: 'change->update-item#submitForm' } %>
+          <i class="fa-regular fa-circle"></i>
+          <i class="fa-solid fa-circle-check"></i>
+        </label>
       </div>
-    </div>
+      
+      <div class="name">
+        <%= f.input_field  :name, data: { action: 'change->update-item#submitForm' }, class: item.errors[:name].any? ? "form-control is-invalid" : "" %>
+      </div>
+      
+      <div class="amount">
+        <%= f.input_field  :amount, data: { action: 'change->update-item#submitForm' }, class: item.errors[:amount].any? ? "form-control is-invalid" : "" %>
+      </div>
+      
+      <div class="comment">
+        <%= f.input_field  :comment, rows: '1', data: { action: 'change->update-item#submitForm' }, class: item.errors[:comment].any? ? "form-control is-invalid" : "" %>
+      </div>
+      
+      <div class="active"> 
+        <label>
+          <%= f.input_field :active, data: { action: 'change->update-item#submitForm' } %>
+          <i class="fa-solid fa-xmark"></i>
+        </label>
+      </div>
   <% end %>
 
-  <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
-    <% item.errors.messages.each do |key, value| %>
-      <p><%= "- Error in #{key}: #{value.first}." %></p>   
-    <% end %>
-  </div>
+    <div class="actions">
 
-  <div class="item-updating d-none" data-update-item-target="updating">
-    <div class="loader">
-      <svg viewBox="25 25 50 50">
-        <circle cx="50" cy="50" r="20"></circle>
-      </svg>
     </div>
-  </div>
-</li>
+
+    <% if item.purchased %>
+      <div class="purchased-info-container">
+        <div class="purchased d-none d-lg-block"></div>
+        <div class="purchased-info">
+          Done by 
+          <% if item.user.avatar.attached? %>
+            <%= cl_image_tag item.user.avatar.key, class: "avatar" %>
+          <% else %>
+            <span class="no-avatar bg-yellow">
+              <i class="fa-solid fa-user"></i>
+            </span>
+          <% end %>
+          <%= item.user.first_name %> - 
+          <%# <%= item.purchased_date.getlocal.strftime("on  %e-%b-%y at %l:%M %p") %>
+          <%= item.purchased_date_humanized %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="input-feedback <%= item.errors.any? ? "" : "d-none" %>">
+      <% item.errors.messages.each do |key, value| %>
+        <p><%= "- Error in #{key}: #{value.first}." %></p>   
+      <% end %>
+    </div>
+
+    <div class="item-updating d-none" data-update-item-target="updating">
+      <div class="loader">
+        <svg viewBox="25 25 50 50">
+          <circle cx="50" cy="50" r="20"></circle>
+        </svg>
+      </div>
+    </div>
+  </li>
+
+<% else %>
+  <div class="d-none" id="item-<%= item.id %>"></div>
+<% end %>
