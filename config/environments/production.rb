@@ -67,7 +67,8 @@ Rails.application.configure do
   # action_mailer settings
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { host: "in-the-list.up.railway.app" }
+  # config.action_mailer.default_url_options = { host: "in-the-list.up.railway.app" }
+  config.action_mailer.default_url_options = { host: "https://in-the-list.onrender.com/" }
 
   config.action_mailer.perform_caching = false
 
