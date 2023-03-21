@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="/public/images/logo.svg" alt="in the list logo." width="30%" >
 
-Things you may want to cover:
+TO-DO web application created with **Ruby on Rails**.
 
-* Ruby version
+Live on [in-the-list.onrender.com](https://in-the-list.onrender.com)
 
-* System dependencies
+:point_right: *Disclaimer:* because of a "hosting-situation", first load might take 30 long seconds :expressionless:
 
-* Configuration
+<img src="/public/images/screens-responsive.png" alt="Screen-shots of application." width="80%" >
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<img src="/public/images/schema.png" alt="App schema." width="50%">
