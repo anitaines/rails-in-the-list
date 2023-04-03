@@ -1,14 +1,11 @@
 <% content_for :title, "- #{@list.name}" %>
 
-<% colors = ["rgba(253, 113, 44, 0.4)", "rgba(254, 225, 119, 0.4)"] %>
-<%#           orange,                    yellow %>
-
 <div class="list-container">
 
   <% if @list.image.attached? %>
     <div class="bg-image" style="background-image: linear-gradient(rgba(254,225,119,0.3), rgba(255,255,255,0.3)), url('<%= cl_image_path @list.image.key %>')"></div>
   <% else %>
-    <div class="bg-image" style="background-color: <%= colors[rand(0..1)] %>"></div>
+    <div class="bg-image" style="background-color: <%= random_color %>"></div>
   <% end %>
 
   <div class="row">
