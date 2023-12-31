@@ -9,6 +9,8 @@ class Item < ApplicationRecord
   belongs_to :list
   belongs_to :user, optional: true
 
+  before_save :capitalize_name, if: -> { name_changed? }
+
   validates :name, presence: true
   validates :name, length: { maximum: 55 }
   validates :amount, length: { maximum: 55 }
@@ -17,5 +19,9 @@ class Item < ApplicationRecord
   def purchased_date_humanized
     # pretty(self.purchased_date.getlocal)
     pretty(self.purchased_date)
+  end
+
+  def capitalize_name
+    self.name = name.capitalize
   end
 end
