@@ -30,7 +30,7 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     patch item_url(@item), params: { item: { name: "Updated Item", amount: "20" } }
     assert_redirected_to list_url(@item.list)
     @item.reload
-    assert_equal "Updated Item", @item.name
+    assert_equal "Updated item", @item.name
     assert_equal "20", @item.amount
   end
 

@@ -21,4 +21,12 @@ class ItemTest < ActiveSupport::TestCase
 
     assert_equal( "Monday, December 12", item.purchased_date_humanized, "purchased date is not humanized")
   end
+
+  test "name is capitalized" do
+    item = Item.new(name: "test name")
+    item.list = lists(:one)
+    item.save
+
+    assert_equal( "Test name", item.name)
+  end
 end
